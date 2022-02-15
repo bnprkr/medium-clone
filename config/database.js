@@ -3,7 +3,7 @@ const {
   password, 
   database, 
   host
-} = require('./index');
+} = require('./index').db;
 
 module.exports = {
   development: {
