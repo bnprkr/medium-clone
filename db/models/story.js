@@ -11,12 +11,25 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Story.belongsTo(models.User, { foreignKey: 'userId' });
     }
   }
   Story.init({
     userId: DataTypes.INTEGER,
-    title: DataTypes.STRING,
-    storyText: DataTypes.TEXT
+    title: {
+      type: DataTypes.STRING,
+      validate: {
+        notNull: true,
+        notEmpty: true
+      }
+    },
+    storyText: {
+      type: DataTypes.TEXT,
+      validate: {
+        notNull: true,
+        notEmpty: true
+      }
+    },
   }, {
     sequelize,
     modelName: 'Story',
