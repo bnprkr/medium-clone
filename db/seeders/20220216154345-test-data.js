@@ -1,6 +1,6 @@
 'use strict';
 
-const { users } = require('./data/fakeData');
+const { users, stories } = require('./data');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -13,8 +13,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-
-    return queryInterface.bulkInsert('Users', users, {});
+    await queryInterface.bulkInsert('Users', users, {});  
+    return queryInterface.bulkInsert('Stories', stories, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -24,6 +24,7 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-     return queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Users', null, {});
+    await queryInterface.bulkDelete('Stories', null, {});
   }
 };

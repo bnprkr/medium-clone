@@ -32,4 +32,4 @@ for (let i = 0; i < numUsers - 1; i++) {
   );
 }
 
-module.exports = { users, };
+module.exports = { users, numUsers };
