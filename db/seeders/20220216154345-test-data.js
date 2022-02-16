@@ -1,8 +1,10 @@
 'use strict';
 
+const { users } = require('./data/fakeData');
+
 module.exports = {
   async up (queryInterface, Sequelize) {
-    /**
+    /*
      * Add seed commands here.
      *
      * Example:
@@ -11,6 +13,8 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
+    return queryInterface.bulkInsert('Users', users, {});
   },
 
   async down (queryInterface, Sequelize) {
@@ -20,5 +24,6 @@ module.exports = {
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
+     return queryInterface.bulkDelete('Users', null, {});
   }
 };
