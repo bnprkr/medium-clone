@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Story.belongsTo(models.User, { foreignKey: 'userId' });
       Story.hasMany(models.StoryLike, { foreignKey: 'storyId' });
+      Story.hasMany(models.Comment, { foreignKey: 'storyId' });
     }
   }
   Story.init({
