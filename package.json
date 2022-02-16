@@ -36,6 +36,7 @@
     "dotenv": "^16.0.0",
     "dotenv-cli": "^5.0.0",
     "faker": "^5.5.3",
+    "lorem-ipsum": "^2.0.4",
     "nodemon": "^2.0.15",
     "sequelize-cli": "^6.4.1"
   }
