@@ -38,4 +38,4 @@ for (let i = 0; i < numComments; i++) {
   );
 }
 
-module.exports = { comments };
+module.exports = { comments, numComments };

@@ -1,6 +1,6 @@
 'use strict';
 
-const { users, stories, comments } = require('./data');
+const { users, stories, comments, storyLikes, commentLikes } = require('./data');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -13,20 +13,26 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
+
     await queryInterface.bulkInsert('Users', users, {});  
     await queryInterface.bulkInsert('Stories', stories, {});
-    return queryInterface.bulkInsert('Comments', comments, {});
-
+    await queryInterface.bulkInsert('Comments', comments, {});
+    await queryInterface.bulkInsert('StoryLikes', storyLikes, {});
+    return queryInterface.bulkInsert('CommentLikes', commentLikes, {});
   },
 
   async down (queryInterface, Sequelize) {
-    /**
+    /*
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
-     */
-    await queryInterface.bulkDelete('Users', null, {});
-    return queryInterface.bulkDelete('Stories', null, {});
+    */
+
+    await queryInterface.bulkDelete('CommentLikes', null, {});
+    await queryInterface.bulkDelete('StoryLikes', null, {});
+    await queryInterface.bulkDelete('Comments', null, {});
+    await queryInterface.bulkDelete('Stories', null, {});
+    return queryInterface.bulkDelete('Users', null, {});
   }
 };
