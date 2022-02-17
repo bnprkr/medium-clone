@@ -3,5 +3,6 @@ module.exports = {
   stories: require('./storiesData').stories,
   comments: require('./commentsData').comments,
   storyLikes: require('./likesData').storyLikes,
-  commentLikes: require('./likesData').commentLikes
+  commentLikes: require('./likesData').commentLikes,
+  follows: require('./followsData').follows,
 }

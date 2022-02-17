@@ -1,6 +1,6 @@
 'use strict';
 
-const { users, stories, comments, storyLikes, commentLikes } = require('./data');
+const { users, stories, comments, storyLikes, commentLikes, follows } = require('./data');
 
 module.exports = {
   async up (queryInterface, Sequelize) {
@@ -18,7 +18,9 @@ module.exports = {
     await queryInterface.bulkInsert('Stories', stories, {});
     await queryInterface.bulkInsert('Comments', comments, {});
     await queryInterface.bulkInsert('StoryLikes', storyLikes, {});
-    return queryInterface.bulkInsert('CommentLikes', commentLikes, {});
+    await queryInterface.bulkInsert('CommentLikes', commentLikes, {});
+    return queryInterface.bulkInsert('Follows', follows, {});
+
   },
 
   async down (queryInterface, Sequelize) {
