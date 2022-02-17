@@ -1,3 +1,4 @@
 node_modules/
 .env
 medium-clone-wiki/
+temp/

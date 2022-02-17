@@ -28,7 +28,7 @@ for (let i = 0; i < numComments; i++) {
   comments.push(
     {
       storyId: storyIndex + 1,
-      userId: stories[storyIndex].userId,
+      userId: Math.floor(Math.random() * numUsers) + 1,
       title: lorem.generateWords(Math.floor(Math.random() * maxWordsTitle) + 1),
       commentText: lorem
         .generateSentences(Math.floor(Math.random() * (maxSentencePerComment - minSentencePerComment + 1)) + minSentencePerComment),
