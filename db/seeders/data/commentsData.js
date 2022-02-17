@@ -8,7 +8,7 @@ const minSentencePerComment = 1;
 const maxSentencePerComment = 5;
 const maxWordsTitle = 3;
 
-const numCommentsTotal = numStories * 5;
+const numComments = numStories * 5;
 
 const lorem = new LoremIpsum({
   sentencesPerParagraph: {
@@ -23,7 +23,7 @@ const lorem = new LoremIpsum({
 
 const comments = [];
 
-for (let i = 0; i < numCommentsTotal; i++) {
+for (let i = 0; i < numComments; i++) {
   const storyIndex = Math.floor(Math.random() * numStories);
   comments.push(
     {
