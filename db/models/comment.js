@@ -22,14 +22,12 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       validate: {
-        notNull: true,
         notEmpty: true
       }
     },
     commentText: {
       type: DataTypes.TEXT,
       validate: {
-        notNull: true,
         notEmpty: true
       }
     }
