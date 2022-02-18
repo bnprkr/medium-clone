@@ -2,7 +2,7 @@ const express = require('express');
 const morgan = require('morgan');
 const session = require('express-session');
 
-const { secret } = require('../config').session;
+const { secret } = require('./config').session;
 const authRoutes = require('./routes/auth');
 
 const app = express();
