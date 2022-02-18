@@ -1,13 +1,13 @@
 const express = require('express');
 const morgan = require('morgan');
 
-const routes = require('./routes');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
 app.set('view engine', 'pug');
 
 app.use(morgan('dev'));
-app.use(routes);
+app.use(authRoutes);
 
 module.exports = app;
