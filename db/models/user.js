@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Comment, { foreignKey: 'userId' });
       User.hasMany(models.CommentLike, { foreignKey: 'userId' });
       User.hasMany(models.Follow, { foreignKey: 'userId' });
-      User.hasMany(models.Follow, { foreignKey: 'followingUserId' });
     }
   }
   User.init({
