@@ -13,7 +13,7 @@ app.use(session({
   store: new (store(session))(),
   secret,
   resave: false,
-  saveUninitialised: false
+  saveUninitialized: false
 }));
 app.use(morgan('dev'));
 app.use(authRoutes);
