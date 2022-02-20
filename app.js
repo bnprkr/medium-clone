@@ -9,6 +9,7 @@ const authRoutes = require('./routes/auth');
 const app = express();
 
 app.set('view engine', 'pug');
+app.use(cookieParser(secret));
 app.use(session({
   // note secure cookie needed in production with expiry time...
   store: new (store(session))(),
