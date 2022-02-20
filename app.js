@@ -18,6 +18,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false
 }));
+app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 app.use(authRoutes);
 
