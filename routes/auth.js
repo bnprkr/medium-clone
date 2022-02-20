@@ -28,7 +28,7 @@ router.get('/register', csrfProtection, (req, res) => {
             if (user) {
               return Promise.reject('Email already in use.');
             }
-          })
+          });
       })
   ];
 });
