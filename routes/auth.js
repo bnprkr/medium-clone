@@ -34,7 +34,20 @@ router.post('/register', csrfProtection, (req, res) => {
 
     const validatorErrors = validationResult(req);
 
-    
+    if (validatorErrors.isEmpty()) {
+      await user.save();
+      res.redirect('/');
+    } else {
+      const errors = validatorErrors.array().map(errorObj => errorObj.msg);
+      res.render('register', {
+        title: 'Register',
+        user, 
+        errors, 
+        csrfToken: req.csrfToken()
+      });
+    }
+
+
   })
 });
 
