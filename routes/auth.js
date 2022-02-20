@@ -7,10 +7,10 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const router = express.Router();
 
 router.get('/register', csrfProtection, (req, res) => {
-  // const user = db.User.build();
+  
   res.render('register', {
     title: 'Register',
-    // user, 
+    user: {}, 
     csrfToken: req.csrfToken(),
   });
 
