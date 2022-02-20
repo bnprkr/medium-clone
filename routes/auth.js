@@ -7,33 +7,32 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const router = express.Router();
 
 router.get('/register', csrfProtection, (req, res) => {
-
   res.render('register', {
     title: 'Register',
     user: {}, 
     csrfToken: req.csrfToken(),
   });
-
-  const userValidators = [
-    check('email')
-      .exists({ checkFalsy: true })
-      .withMessage('Please provide a value for Email Address')
-      .isLength({ max: 255 })
-      .withMessage('Email Address length cannot be longer than 255 characters')
-      .isEmail()
-      .withMessage('Email Address is not a valid email')
-      .custom(value => {
-        return db.User.findOne({ where: { email: value } })
-          .then(user => {
-            if (user) {
-              return Promise.reject('Email already in use.');
-            }
-          });
-      })
-  ];
 });
 
-router.post('/register', csrfProtection, (req, res) => {
+const userValidators = [
+  check('email')
+    .exists({ checkFalsy: true })
+    .withMessage('Please provide a value for Email Address')
+    .isLength({ max: 255 })
+    .withMessage('Email Address length cannot be longer than 255 characters')
+    .isEmail()
+    .withMessage('Email Address is not a valid email')
+    .custom(value => {
+      return db.User.findOne({ where: { email: value } })
+        .then(user => {
+          if (user) {
+            return Promise.reject('Email already in use.');
+          }
+        });
+    })
+];
+
+router.post('/register', csrfProtection, userValidators, (req, res) => {
   asyncHandler(async (req, res) => {
     const {
       username,
@@ -61,7 +60,7 @@ router.post('/register', csrfProtection, (req, res) => {
       });
     }
 
-
+    
   })
 });
 
