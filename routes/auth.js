@@ -67,7 +67,7 @@ router.post('/register', csrfProtection, userValidators, (req, res) => {
   asyncHandler(async (req, res) => {
     const {
       username,
-      emailAddress,
+      email,
       password,
     } = req.body;
 
@@ -79,6 +79,8 @@ router.post('/register', csrfProtection, userValidators, (req, res) => {
     const validatorErrors = validationResult(req);
 
     if (validatorErrors.isEmpty()) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.hashedPassword = hashedPassword;
       await user.save();
       res.redirect('/');
     } else {
