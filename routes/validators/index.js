@@ -50,4 +50,13 @@ const userValidators = [
       }),
   ];
 
-  module.exports = { userValidators }
+  const loginValidators = [
+    check('email')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for Email Address'),
+    check('password')
+      .exists({ checkFalsy: true })
+      .withMessage('Please provide a value for Password'),
+  ];
+
+  module.exports = { userValidators, loginValidators }
