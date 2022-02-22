@@ -1,5 +1,6 @@
 const express = require('express');
 const { check, validationResult } = require('express-validator');
+const bcrypt = require('bcryptjs');
 
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils'); 
@@ -63,7 +64,7 @@ const userValidators = [
     }),
 ];
 
-router.post('/register', csrfProtection, userValidators, (req, res) => {
+router.post('/register', csrfProtection, userValidators,
   asyncHandler(async (req, res) => {
     const {
       username,
@@ -93,9 +94,8 @@ router.post('/register', csrfProtection, userValidators, (req, res) => {
       });
     }
 
-    
   })
-});
+);
 
 router.get('/login', (req, res) => {
   res.send('OK');
