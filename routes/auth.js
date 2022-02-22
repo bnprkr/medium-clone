@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils'); 
-const { userValidators } = require('./validators')
+const { userValidators, loginValidators } = require('./validators')
 
 const router = express.Router();
 
@@ -49,8 +49,36 @@ router.post('/register', csrfProtection, userValidators,
   })
 );
 
-router.get('/login', (req, res) => {
-  res.send('OK');
+router.get('/login', csrfProtection, (req, res) => {
+  res.render('login', {
+    title: 'Login', 
+    csrfToken: req.csrfToken(),
+  });
 });
+
+router.post('/login', csrfProtection, loginValidators, 
+  asyncHandler(async (req, res) => {
+    const {
+      email, 
+      password
+    } = req.body;
+
+    let errors = [];
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      // TODO login user
+    } else {
+      errors = validatorErrors.array().map(errorObj => errorObj.msg);
+    }
+
+    res.render('login', {
+      title: 'Login', 
+      email, 
+      errors, 
+      csrfToken: req.csrfToken(),
+    });
+
+  }));
 
 module.exports = router;
