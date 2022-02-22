@@ -1,0 +1,10 @@
+include utils.pug 
+
++validationErrorSummary(errors)
+form(action='/login', method='post')
+  input(type='hidden', name='_csrf', value=csrfToken)
+  +field('Email Address', 'email', email)
+  +field('Password', 'password', null, 'password')
+  div
+    button(type='submit') Login
+    a(href='/') Cancel
