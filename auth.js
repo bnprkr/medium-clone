@@ -21,6 +21,7 @@ const restoreUser = async (req, res, next) => {
         res.locals.user = user;
         next();
       } else {
+        delete req.session.auth;
         res.locals.authenticated = false;
         next();
       }
