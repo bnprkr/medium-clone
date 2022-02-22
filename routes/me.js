@@ -12,6 +12,7 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const { userValidators, loginValidators } = require('./validators')
 const { loginUser, restoreUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
+const { Op } = require('sequelize');
 
 const charsInPreview = 120;
 const numStorysFeed = 10;
@@ -24,7 +25,22 @@ router.get('/', restoreUser, requireAuth,
     // get 10 random stories of logged in user
     // with num likes and comments for each story
 
+    // get following ids for currently logged in user
+    // get stories authored by users followed by currently logged in user
+
+    const userId = res.locals.user.id;
+
+    const following = await Follow.findAll({
+      attributes: ['followingUserId'],
+      where: { userId }
+    });
+
+    const followingIds = following.map(follow => {
+      return follow.followingUserId;
+    })
+
     const stories = await Story.findAll({ 
+      where: { userId: { [Op.in]: followingIds } },
       order: sequelize.random(),
       limit: numStorysFeed,
       include: [User, StoryLike, Comment]
@@ -33,6 +49,7 @@ router.get('/', restoreUser, requireAuth,
     const storyData = stories.map(story => {
       return {
         title: story.title,
+        authorId: story.User.id,
         author: story.User.username,
         sample: story.storyText.slice(0, charsInPreview),
         numLikes: story.StoryLikes.length,
@@ -41,6 +58,17 @@ router.get('/', restoreUser, requireAuth,
     });
 
     return res.send(storyData);
+  })
+);
+
+router.get('/me/stories', 
+  asyncHandler(async (req, res) => {
+    // get all stories of logged in user, starting with most recently added
+    // also get number of likes and comments for each story
+
+
+
+
   })
 );
 
