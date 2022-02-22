@@ -49,7 +49,7 @@ router.get('/', restoreUser, requireAuth,
     const storyData = stories.map(story => {
       return {
         title: story.title,
-        authorId: story.User.id,
+        authorId: story.userId,
         author: story.User.username,
         sample: story.storyText.slice(0, charsInPreview),
         numLikes: story.StoryLikes.length,
@@ -63,12 +63,26 @@ router.get('/', restoreUser, requireAuth,
 
 router.get('/me/stories', 
   asyncHandler(async (req, res) => {
-    // get all stories of logged in user, starting with most recently added
-    // also get number of likes and comments for each story
+    const userId = res.locals.user.id;
 
+    const stories = await Story.findAll({
+      where: { userId },
+      order: [['createdAt', 'DESC']],
+      include: [User, StoryLike, Comment]
+    });
 
+    const storyData = stories.map(story => {
+      return {
+        title: story.title,
+        authorId: story.userId,
+        author: story.User.username,
+        sample: story.storyText.slice(0, charsInPreview),
+        numLikes: story.StoryLikes.length,
+        numComments: story.Comments.length,
+      }
+    });
 
-
+    return res.send(storyData);
   })
 );
 
