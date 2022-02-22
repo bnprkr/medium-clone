@@ -5,7 +5,7 @@ const store = require('connect-pg-simple');
 const cookieParser = require('cookie-parser');
 
 const { secret } = require('./config').session;
-const authRoutes = require('./routes/auth');
+const authRoutes = require('./routes/user');
 
 const app = express();
 
