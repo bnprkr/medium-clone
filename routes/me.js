@@ -86,4 +86,42 @@ router.get('/me/stories', requireAuth,
   })
 );
 
+router.get('/me/follow', requireAuth, 
+  asyncHandler(async (req, res) => {
+    // get users currently logged in user is following
+    // for each user get:
+    // username, followers, following, #stories authored
+
+    const userId = res.locals.user.id;
+
+    const following = await Follow.findAll({
+      where: { userId },
+      include: [User]
+    });
+
+    const followingData = following.map(follow => {
+      return {
+        username: follow.User.username,
+        // following: follow.User.Follows.length
+      }
+    })
+
+    // get users currently logged in user is not following
+
+    const followingIds = following.map(follow => follow.followingUserId);
+
+    const notFollowing = await User.findAll({
+      where: { id: { [Op.notIn]: [...followingIds, userId] } }
+    });
+
+    const notFollowingData = notFollowing.map(user => {
+      return {
+        username: user.username
+      }
+    })
+
+    return res.send({ followingData, notFollowingData });
+  })
+);
+
 module.exports = router;
