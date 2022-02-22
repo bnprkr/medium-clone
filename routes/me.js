@@ -19,7 +19,7 @@ const numStorysFeed = 10;
 
 const router = express.Router();
 
-router.get('/', restoreUser, requireAuth,
+router.get('/', requireAuth,
   asyncHandler(async (req, res) => {
 
     // get 10 random stories of logged in user
@@ -61,7 +61,7 @@ router.get('/', restoreUser, requireAuth,
   })
 );
 
-router.get('/me/stories', 
+router.get('/me/stories', requireAuth,
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
 
