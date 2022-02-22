@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 
 const { secret } = require('./config').session;
 const authRoutes = require('./routes/user');
+const userRoutes = require('./routes/me');
 const { restoreUser } = require('./auth');
 
 const app = express();
@@ -23,5 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan('dev'));
 app.use(restoreUser);
 app.use(authRoutes);
+app.use(userRoutes);
 
 module.exports = app;
