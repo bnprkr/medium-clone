@@ -19,7 +19,9 @@ const numStorysFeed = 10;
 
 const router = express.Router();
 
-router.get('/', requireAuth,
+router.use(requireAuth);
+
+router.get('/',
   asyncHandler(async (req, res) => {
 
     // get 10 random stories of logged in user
@@ -61,7 +63,7 @@ router.get('/', requireAuth,
   })
 );
 
-router.get('/me/stories', requireAuth,
+router.get('/me/stories',
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
 
@@ -86,7 +88,7 @@ router.get('/me/stories', requireAuth,
   })
 );
 
-router.get('/me/follow', requireAuth, 
+router.get('/me/follow',
   asyncHandler(async (req, res) => {
     // get users currently logged in user is following
     // for each user get:
@@ -124,7 +126,7 @@ router.get('/me/follow', requireAuth,
   })
 );
 
-router.get('/me/:storyId/edit', requireAuth,
+router.get('/me/:storyId/edit',
   asyncHandler(async (req, res) => {
     // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
 
