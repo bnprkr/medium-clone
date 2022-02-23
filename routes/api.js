@@ -82,4 +82,59 @@ router.delete('/stories/:storyId/like',
   })
 );
 
+
+router.post('/comments/:commentId/like',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const commentId = req.params.commentId;
+
+    const like = await CommentLike.findOne({
+      where: {
+        userId,
+        commentId,
+      }
+    });
+
+    if (!like) {
+      // create like
+      const newLike = await CommentLike.create({ userId, commentId });
+
+      if (newLike) {
+        return res.status(201).end();
+      } else {
+        // TODO error handling for failed like creation...
+      }
+      
+    } else {
+      // TODO error handling for like already exists... 
+      // should only reach this route if like does not exist
+    }
+
+  })
+);
+
+router.delete('/stories/:commentId/like',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const commentId = req.params.commentId;
+
+    const like = await CommentLike.findOne({
+      where: {
+        userId,
+        commentId,
+      }
+    });
+
+    if (like) {
+      await like.destroy()
+      res.status(204).end();
+    } else {
+      // TODO handle error
+      // should only reach this route if like exists
+      // hence error if doesn't
+    }
+
+  })
+);
+
 module.exports = router
