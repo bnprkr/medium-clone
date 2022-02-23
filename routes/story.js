@@ -11,9 +11,11 @@ const { Op } = require('sequelize');
 
 const router = express.Router();
 
+router.use(requireAuth);
+
 const charsInPreview = 120;
 
-router.get('/@:username/stories', requireAuth,
+router.get('/@:username/stories',
   asyncHandler(async (req, res) => {
 
     console.log(req.params.username)
@@ -42,7 +44,7 @@ router.get('/@:username/stories', requireAuth,
   })
 );
 
-router.get('/@:username/:storyId', requireAuth,
+router.get('/@:username/:storyId',
   asyncHandler(async (req, res) => {
     
     // TODO add error handling to check if :storyId belongs to :username and return error if not
