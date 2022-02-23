@@ -45,13 +45,14 @@ router.post('/stories/:storyId/like',
       const newLike = await StoryLike.create({ userId, storyId });
 
       if (newLike) {
-        return res.json({ success: true });
+        return res.status(201).end();
       } else {
-        // TODO add error handling for failed like creation...
+        // TODO error handling for failed like creation...
       }
       
     } else {
-      return res.json({ success: false });
+      // TODO error handling for like already exists... 
+      // should only reach this route if like does not exist
     }
 
   })
@@ -77,8 +78,6 @@ router.delete('/stories/:storyId/like',
       // should only reach this route if like exists
       // hence error if doesn't
     }
-
-
 
   })
 );
