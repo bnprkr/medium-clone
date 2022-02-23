@@ -10,7 +10,7 @@ const bcrypt = require('bcryptjs');
 const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils'); 
 const { userValidators, loginValidators } = require('./validators')
-const { loginUser, restoreUser, requireAuth } = require('../auth');
+const { loginUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
 const { Op } = require('sequelize');
 
@@ -18,7 +18,7 @@ const router = express.Router();
 
 const charsInPreview = 120;
 
-router.get('/@:username/stories', 
+router.get('/@:username/stories', requireAuth,
   asyncHandler(async (req, res) => {
 
     console.log(req.params.username)
@@ -44,8 +44,9 @@ router.get('/@:username/stories',
 
     return res.send(storiesData);
 
-
   })
 );
+
+router.get('/@:username/:storyId', )
 
 module.exports = router;
