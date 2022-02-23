@@ -8,6 +8,7 @@ const { secret } = require('./config').session;
 const authRoutes = require('./routes/user');
 const userRoutes = require('./routes/me');
 const storyRoutes = require('./routes/story');
+const apiRoutes = require('./routes/api');
 const { restoreUser } = require('./auth');
 
 const app = express();
@@ -27,5 +28,6 @@ app.use(restoreUser);
 app.use(authRoutes);
 app.use(userRoutes);
 app.use(storyRoutes);
+app.use('/api', apiRoutes);
 
 module.exports = app;
