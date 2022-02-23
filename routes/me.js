@@ -141,4 +141,20 @@ router.get('/me/:storyId/edit',
   })
 );
 
+router.post('/me/:storyId/delete',
+  asyncHandler(async (req, res) => {
+    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
+
+    const story = await Story.findOne({ where: { id: req.params.storyId } });
+
+    if (story) {
+      await story.destroy();
+      return res.status(204).end();
+    } else {
+      // TODO add error handling for delete story that does not exist...
+    }
+
+  })
+);
+
 module.exports = router;
