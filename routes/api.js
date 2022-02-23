@@ -1,10 +1,10 @@
-// - POST /api/stories/:storyId/likes
-// - DELETE /api/stories/:storyId/likes
-// - POST /api/comments/:commentId/likes
-// - DELETE /api/comments/:commentId/likes
+// - POST api/stories/:storyId/like
+// - DELETE /api/stories/:storyId/like
+// - POST /api/comments/:commentId/like
+// - DELETE /api/comments/:commentId/like
 
-// - POST /api/users/:userId/follows/:userId
-// - DELETE /api/users/:userId/follows/:userId
+// - POST /api/users/:userId/follow/:userId
+// - DELETE /api/users/:userId/follow/:userId
 
 // TODO add to me.js:
 // POST /me/:storyId/delete
@@ -28,7 +28,7 @@ router.use(requireAuth);
 // NOTE - BASIC ROUTES FOR NOW, MORE NEEDED ON HOW TO IMPLEMENT THESE ROUTES
 // AND SO HOW TO HANDLE SUCCESS/FAILURE FOR EACH ROUTE...
 
-router.post('/stories/:storyId/likes',
+router.post('/stories/:storyId/like',
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
     const storyId = req.params.storyId;
@@ -56,3 +56,5 @@ router.post('/stories/:storyId/likes',
 
   })
 );
+
+module.exports = router
