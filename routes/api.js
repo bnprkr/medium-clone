@@ -57,4 +57,30 @@ router.post('/stories/:storyId/like',
   })
 );
 
+router.delete('/stories/:storyId/like',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const storyId = req.params.storyId;
+
+    const like = await StoryLike.findOne({
+      where: {
+        userId,
+        storyId,
+      }
+    });
+
+    if (like) {
+      await like.destroy()
+      res.status(204).end();
+    } else {
+      // TODO handle error
+      // should only reach this route if like exists
+      // hence error if doesn't
+    }
+
+
+
+  })
+);
+
 module.exports = router
