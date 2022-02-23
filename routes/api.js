@@ -167,4 +167,28 @@ router.post('/users/:userId/follow/:followId',
   })
 );
 
+router.delete('/users/:userId/follow/:followId',
+  asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
+    const followingUserId = req.params.followId;
+
+    const follow = await Follow.findOne({
+      where: {
+        userId,
+        followingUserId,
+      }
+    });
+
+    if (follow) {
+      await follow.destroy()
+      res.status(204).end();
+    } else {
+      // TODO handle error
+      // should only reach this route if follow exists
+      // hence error if doesn't
+    }
+
+  })
+);
+
 module.exports = router
