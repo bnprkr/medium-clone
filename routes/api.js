@@ -137,4 +137,34 @@ router.delete('/stories/:commentId/like',
   })
 );
 
+router.post('/users/:userId/follow/:followId',
+  asyncHandler(async (req, res) => {
+    const userId = req.params.userId;
+    const followingUserId = req.params.followId;
+
+    const follow = await Follow.findOne({
+      where: {
+        userId,
+        followingUserId,
+      }
+    });
+
+    if (!follow) {
+      // create like
+      const newFollow = await Follow.create({ userId, followingUserId });
+
+      if (newFollow) {
+        return res.status(201).end();
+      } else {
+        // TODO error handling for failed follow creation...
+      }
+      
+    } else {
+      // TODO error handling for follow already exists... 
+      // should only reach this route if follow does not exist
+    }
+
+  })
+);
+
 module.exports = router
