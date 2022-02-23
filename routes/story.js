@@ -47,6 +47,27 @@ router.get('/@:username/stories', requireAuth,
   })
 );
 
-router.get('/@:username/:storyId', )
+router.get('/@:username/:storyId', requireAuth,
+  asyncHandler(async (req, res) => {
+    
+    // TODO add error handling to check if storyId belongs to :username and return error if not
+
+    const story = await Story.findOne({ 
+      where: { id: req.params.storyId },
+      include: [User, StoryLike, Comment],
+    });
+
+    const storyData = {
+      title: story.title,
+      authorId: story.userId,
+      author: story.User.username,
+      text: story.storyText,
+      numLikes: story.StoryLikes.length,
+      numComments: story.Comments.length,
+    }
+
+    return res.send(storyData);
+  })
+);
 
 module.exports = router;
