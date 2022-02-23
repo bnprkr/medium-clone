@@ -129,11 +129,13 @@ router.get('/me/:storyId/edit', requireAuth,
     // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
 
     const story = await Story.findOne({ where: { id: req.params.storyId } });
-    
-    res.send({
+
+    const storyData = {
       title: story.title,
       text: story.storyText,
-    });
+    }
+    
+    return res.send(storyData);
   })
 );
 
