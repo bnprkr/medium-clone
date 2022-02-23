@@ -6,8 +6,6 @@
 // - POST /api/users/:userId/follow/:userId
 // - DELETE /api/users/:userId/follow/:userId
 
-// TODO add to me.js:
-// POST /me/:storyId/delete
 
 const express = require('express');
 const { validationResult } = require('express-validator');
