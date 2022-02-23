@@ -118,9 +118,22 @@ router.get('/me/follow', requireAuth,
       return {
         username: user.username
       }
-    })
+    });
 
     return res.send({ followingData, notFollowingData });
+  })
+);
+
+router.get('/me/:storyId/edit', requireAuth,
+  asyncHandler(async (req, res) => {
+    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
+
+    const story = await Story.findOne({ where: { id: req.params.storyId } });
+    
+    res.send({
+      title: story.title,
+      text: story.storyText,
+    });
   })
 );
 
