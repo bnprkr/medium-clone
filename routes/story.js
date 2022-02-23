@@ -1,8 +1,3 @@
-// story related routes
-// /@:username/stories
-// /@:username/:storyId
-// /@:username/:storyId/edit
-
 const express = require('express');
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
@@ -50,7 +45,7 @@ router.get('/@:username/stories', requireAuth,
 router.get('/@:username/:storyId', requireAuth,
   asyncHandler(async (req, res) => {
     
-    // TODO add error handling to check if storyId belongs to :username and return error if not
+    // TODO add error handling to check if :storyId belongs to :username and return error if not
 
     const story = await Story.findOne({ 
       where: { id: req.params.storyId },
