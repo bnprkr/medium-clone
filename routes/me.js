@@ -109,10 +109,6 @@ router.get('/me/stories/:storyId',
       include: [User, StoryLike, { model: Comment, include: User }],
     });
 
-    // const comments = story.Comments;
-    // console.log(JSON.stringify(comments, null, 4));
-    // console.log(comments.User);
-
     const comments = story.Comments.map(comment => {
       return {
         author: comment.User.username,
