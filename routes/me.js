@@ -96,30 +96,33 @@ router.get('/me/stories',
   })
 );
 
-router.get('/@:username/:storyId',
+router.get('/me/stories/:storyId',
   asyncHandler(async (req, res) => {
     
-    // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
+    // TODO add handling to check if :storyId belongs to currently logged in user, 
+    // redirect to /:username/stories/:storyId if not
+
+    const storyId = req.params.storyId;
 
     const story = await Story.findOne({ 
-      where: { id: req.params.storyId },
+      where: { id: storyId },
       include: [User, StoryLike, Comment],
     });
 
     const storyData = {
+      storyId,
       title: story.title,
-      authorId: story.userId,
-      author: story.User.username,
       text: story.storyText,
       numLikes: story.StoryLikes.length,
-      numComments: story.Comments.length,
-    }
+    };
 
-    return res.send(storyData);
+    return res.render('my-story', {
+      story: storyData
+    });
   })
 );
 
-router.get('/me/:storyId/edit',
+router.get('/me/stories/:storyId/edit',
   asyncHandler(async (req, res) => {
     // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
 
@@ -134,7 +137,7 @@ router.get('/me/:storyId/edit',
   })
 );
 
-router.get('/me/:storyId/delete',
+router.get('/me/stories/:storyId/delete',
   asyncHandler(async (req, res) => {
     // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
 
