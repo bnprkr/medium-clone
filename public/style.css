@@ -1,0 +1,13 @@
+main {
+  width: 750px;
+  margin: auto;
+}
+
+.story-box-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+article {
+  margin-bottom: 35px;
+}
