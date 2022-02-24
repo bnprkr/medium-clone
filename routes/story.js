@@ -47,7 +47,7 @@ router.get('/@:username/stories',
 router.get('/@:username/:storyId',
   asyncHandler(async (req, res) => {
     
-    // TODO add error handling to check if :storyId belongs to :username and return error if not
+    // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
 
     const story = await Story.findOne({ 
       where: { id: req.params.storyId },
