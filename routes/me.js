@@ -106,14 +106,27 @@ router.get('/me/stories/:storyId',
 
     const story = await Story.findOne({ 
       where: { id: storyId },
-      include: [User, StoryLike, Comment],
+      include: [User, StoryLike, { model: Comment, include: User }],
     });
+
+    // const comments = story.Comments;
+    // console.log(JSON.stringify(comments, null, 4));
+    // console.log(comments.User);
+
+    const comments = story.Comments.map(comment => {
+      return {
+        author: comment.User.username,
+        title: comment.title,
+        text: comment.commentText,
+      }
+    })
 
     const storyData = {
       storyId,
       title: story.title,
       text: story.storyText,
       numLikes: story.StoryLikes.length,
+      comments,
     };
 
     return res.render('my-story', {
