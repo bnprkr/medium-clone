@@ -14,7 +14,7 @@ const { loginUser, restoreUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
 const { Op } = require('sequelize');
 
-const charsInPreview = 120;
+const charsInPreview = 180;
 const numStorysFeed = 10;
 
 const router = express.Router();
@@ -53,7 +53,7 @@ router.get('/',
         title: story.title,
         authorId: story.userId,
         author: story.User.username,
-        sample: story.storyText.slice(0, charsInPreview),
+        sample: story.storyText.slice(0, charsInPreview) + '...',
         numLikes: story.StoryLikes.length,
         numComments: story.Comments.length,
       }
