@@ -18,5 +18,20 @@ block content
           .right 
             .edit-delete
               a(href="/me/stories/" + `${story.storyId}` + "/edit") Edit 
-              a(href="/me/stories/" + `${story.storyId}` + "/delete") Delete  
+              a(href="/me/stories/" + `${story.storyId}` + "/delete") Delete
+    .comments 
+      .create-comment
+        .form 
+      each comment in story.comments 
+        .comment-box 
+          .comment-author 
+            | #{comment.author}
+          .comment-title 
+            h3 #{comment.title}
+          .comment-text 
+            each para in comment.text.split('\n')
+              p #{para}
+
+  
+
 
