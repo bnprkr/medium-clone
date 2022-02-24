@@ -149,7 +149,7 @@ router.get('/me/:storyId/edit',
   })
 );
 
-router.post('/me/:storyId/delete',
+router.get('/me/:storyId/delete',
   asyncHandler(async (req, res) => {
     // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
 
