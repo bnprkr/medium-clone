@@ -48,7 +48,7 @@ router.get('/',
       include: [User, StoryLike, Comment]
     });
 
-    const storyData = stories.map(story => {
+    const storiesData = stories.map(story => {
       return {
         title: story.title,
         authorId: story.userId,
@@ -59,7 +59,11 @@ router.get('/',
       }
     });
 
-    return res.send(storyData);
+    return res.render('feed', {
+      title: 'Home',
+      stories: storiesData
+    });
+
   })
 );
 
