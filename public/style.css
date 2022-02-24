@@ -11,3 +11,8 @@ main {
 article {
   margin-bottom: 35px;
 }
+
+.comments {
+  width: 80%;
+  margin: auto;
+}
