@@ -77,18 +77,22 @@ router.get('/me/stories',
       include: [User, StoryLike, Comment]
     });
 
-    const storyData = stories.map(story => {
+    const storiesData = stories.map(story => {
       return {
         title: story.title,
         authorId: story.userId,
         author: story.User.username,
-        sample: story.storyText.slice(0, charsInPreview),
+        sample: story.storyText.slice(0, charsInPreview) + '...',
         numLikes: story.StoryLikes.length,
         numComments: story.Comments.length,
       }
     });
 
-    return res.send(storyData);
+    return res.render('my-stories', {
+      title: 'My Stories',
+      stories: storiesData
+    });
+
   })
 );
 
