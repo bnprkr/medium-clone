@@ -10,7 +10,8 @@ block content
           .story-title 
             h2 #{story.title} 
           .story-text-sample 
-            p #{story.sample}
+            each para in story.sample.split('\n')
+              p #{para}
           .story-box-bottom-bar 
             .left 
               .story-likes
