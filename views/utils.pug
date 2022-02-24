@@ -19,7 +19,7 @@ mixin storyPreviews(stories)
           p #{story.author}
         .story-title 
           h2 #{story.title} 
-        .story-text-sample 
+        .story-text
           each para in story.sample.split('\n')
             p #{para}
         .story-box-bottom-bar 
