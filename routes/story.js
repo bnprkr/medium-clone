@@ -44,7 +44,7 @@ router.get('/@:username/stories',
   })
 );
 
-router.get('/@:username/:storyId',
+router.get('/@:username/stories/:storyId',
   asyncHandler(async (req, res) => {
     
     // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
