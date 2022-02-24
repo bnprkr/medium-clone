@@ -96,6 +96,60 @@ router.get('/me/stories',
   })
 );
 
+router.get('/@:username/:storyId',
+  asyncHandler(async (req, res) => {
+    
+    // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
+
+    const story = await Story.findOne({ 
+      where: { id: req.params.storyId },
+      include: [User, StoryLike, Comment],
+    });
+
+    const storyData = {
+      title: story.title,
+      authorId: story.userId,
+      author: story.User.username,
+      text: story.storyText,
+      numLikes: story.StoryLikes.length,
+      numComments: story.Comments.length,
+    }
+
+    return res.send(storyData);
+  })
+);
+
+router.get('/me/:storyId/edit',
+  asyncHandler(async (req, res) => {
+    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
+
+    const story = await Story.findOne({ where: { id: req.params.storyId } });
+
+    const storyData = {
+      title: story.title,
+      text: story.storyText,
+    }
+    
+    return res.send(storyData);
+  })
+);
+
+router.get('/me/:storyId/delete',
+  asyncHandler(async (req, res) => {
+    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
+
+    const story = await Story.findOne({ where: { id: req.params.storyId } });
+
+    if (story) {
+      await story.destroy();
+      return res.status(204).end();
+    } else {
+      // TODO add error handling for delete story that does not exist...
+    }
+
+  })
+);
+
 router.get('/me/follow',
   asyncHandler(async (req, res) => {
     // get users currently logged in user is following
@@ -131,37 +185,6 @@ router.get('/me/follow',
     });
 
     return res.send({ followingData, notFollowingData });
-  })
-);
-
-router.get('/me/:storyId/edit',
-  asyncHandler(async (req, res) => {
-    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
-
-    const story = await Story.findOne({ where: { id: req.params.storyId } });
-
-    const storyData = {
-      title: story.title,
-      text: story.storyText,
-    }
-    
-    return res.send(storyData);
-  })
-);
-
-router.get('/me/:storyId/delete',
-  asyncHandler(async (req, res) => {
-    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
-
-    const story = await Story.findOne({ where: { id: req.params.storyId } });
-
-    if (story) {
-      await story.destroy();
-      return res.status(204).end();
-    } else {
-      // TODO add error handling for delete story that does not exist...
-    }
-
   })
 );
 
