@@ -126,7 +126,7 @@ router.get('/me/stories/:storyId',
       comments,
     };
 
-    return res.render('my-story', {
+    return res.render('story', {
       story: storyData
     });
   })
