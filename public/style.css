@@ -16,3 +16,7 @@ article {
   width: 80%;
   margin: auto;
 }
+
+textarea {
+  resize: none;
+}
