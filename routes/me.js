@@ -143,7 +143,9 @@ router.get('/me/stories/:storyId/edit',
       text: story.storyText,
     }
     
-    return res.send(storyData);
+    return res.render('story-edit', {
+      story: storyData
+    })
   })
 );
 
