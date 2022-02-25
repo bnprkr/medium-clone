@@ -26,6 +26,10 @@ router.use(requireAuth);
 // NOTE - BASIC ROUTES FOR NOW, MORE NEEDED ON HOW TO IMPLEMENT THESE ROUTES
 // AND SO HOW TO HANDLE SUCCESS/FAILURE FOR EACH ROUTE...
 
+// get like status for story
+
+
+
 router.post('/stories/:storyId/like',
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
@@ -49,8 +53,7 @@ router.post('/stories/:storyId/like',
       }
       
     } else {
-      // TODO error handling for like already exists... 
-      // should only reach this route if like does not exist
+      return res.status(409).end();
     }
 
   })
