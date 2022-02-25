@@ -20,3 +20,7 @@ article {
 textarea {
   resize: none;
 }
+
+button.like-button.liked {
+  background-color: #008CBA;
+}
