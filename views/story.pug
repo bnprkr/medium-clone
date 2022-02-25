@@ -16,9 +16,10 @@ block content
             .story-likes
               span #{story.numLikes} 
           .right 
-            .edit-delete
-              a(href="/me/stories/" + `${story.storyId}` + "/edit") Edit 
-              a(href="/me/stories/" + `${story.storyId}` + "/delete") Delete
+            if story.myStory
+              .edit-delete
+                a(href="/me/stories/" + `${story.storyId}` + "/edit") Edit 
+                a(href="/me/stories/" + `${story.storyId}` + "/delete") Delete
     .comments 
       .comment-form
         form(action="")

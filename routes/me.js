@@ -118,6 +118,7 @@ router.get('/me/stories/:storyId',
     })
 
     const storyData = {
+      myStory: true,
       storyId,
       title: story.title,
       text: story.storyText,
