@@ -49,21 +49,33 @@ router.get('/@:username/stories/:storyId',
     
     // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
 
+    const storyId = req.params.storyId;
+
     const story = await Story.findOne({ 
-      where: { id: req.params.storyId },
-      include: [User, StoryLike, Comment],
+      where: { id: storyId },
+      include: [User, StoryLike, { model: Comment, include: User }],
     });
 
+    const comments = story.Comments.map(comment => {
+      return {
+        author: comment.User.username,
+        title: comment.title,
+        text: comment.commentText,
+      }
+    })
+
     const storyData = {
+      myStory: false,
+      storyId,
       title: story.title,
-      authorId: story.userId,
-      author: story.User.username,
       text: story.storyText,
       numLikes: story.StoryLikes.length,
-      numComments: story.Comments.length,
-    }
+      comments,
+    };
 
-    return res.send(storyData);
+    return res.render('story', {
+      story: storyData
+    });
   })
 );
 
