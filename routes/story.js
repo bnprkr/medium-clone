@@ -49,7 +49,11 @@ router.get('/@:username/stories/:storyId',
     
     // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
 
-    const storyId = req.params.storyId;
+    const storyId = parseInt(req.params.storyId);
+
+    const currentUserId = res.locals.user.id;
+
+    console.log('type of currentUserID', typeof currentUserId);
 
     const story = await Story.findOne({ 
       where: { id: storyId },
@@ -62,9 +66,14 @@ router.get('/@:username/stories/:storyId',
         title: comment.title,
         text: comment.commentText,
       }
-    })
+    });
+
+    const liked = story.StoryLikes.some(like => {
+      return (like.storyId === storyId && like.userId === currentUserId);
+    });
 
     const storyData = {
+      liked,
       myStory: false,
       storyId,
       title: story.title,
