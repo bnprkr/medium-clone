@@ -18,6 +18,8 @@ likeButton.addEventListener("click", async (event) => {
     if (res.ok) {
       likes.innerHTML = numLikes + 1;
       event.target.classList.add("liked");
+    } else {
+      
     }
 
   } catch (e) {
