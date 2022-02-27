@@ -15,8 +15,11 @@ block content
           .left 
             .story-likes
               span #{story.numLikes} 
-            .story-like-button 
-              button.like-button Like
+            .story-like-button
+              if story.liked 
+                button.like-button.liked Like
+              else 
+                button.like-button Like
           .right 
             if story.myStory
               .edit-delete
