@@ -138,6 +138,28 @@ router.delete('/stories/:commentId/like',
   })
 );
 
+// is currently logged in user following user with :userId? 
+router.get('/users/:userId/follow',
+  asyncHandler(async (req, res) => {
+    const currentUserId = res.locals.user.id;
+    const followingUserId = req.params.userId;
+
+    const follow = await Follow.findOne({
+      where: {
+        userId: currentUserId, 
+        followingUserId,
+      }
+    });
+
+    if (follow) {
+      return res.send({ following: true });
+    } else {
+      return res.send({ following: false });
+    }
+
+  })
+);
+
 router.post('/users/:userId/follow/:followId',
   asyncHandler(async (req, res) => {
     const userId = req.params.userId;
