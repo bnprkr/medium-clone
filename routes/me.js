@@ -102,7 +102,7 @@ router.get('/me/stories/:storyId',
     // TODO add handling to check if :storyId belongs to currently logged in user, 
     // redirect to /:username/stories/:storyId if not
 
-    const storyId = req.params.storyId;
+    const storyId = parseInt(req.params.storyId);
 
     const story = await Story.findOne({ 
       where: { id: storyId },
@@ -115,10 +115,15 @@ router.get('/me/stories/:storyId',
         title: comment.title,
         text: comment.commentText,
       }
-    })
+    });
+
+    const liked = story.StoryLikes.some(like => {
+      return (like.storyId === storyId && like.userId === res.locals.user.id);
+    });
 
     const storyData = {
       myStory: true,
+      liked,
       storyId,
       title: story.title,
       text: story.storyText,
