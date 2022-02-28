@@ -11,7 +11,7 @@ block content
           each follow in following 
             .follow-box(id=`${follow.id}`) 
               h3.username #{follow.username}
-              button.follow-button.following Follow 
+              button.follow-button.following Following
             
       .not-following-container
         h2 Not following
@@ -19,6 +19,6 @@ block content
           each follow in notFollowing 
             .follow-box(id=`${follow.id}`) 
               h3.username #{follow.username}
-              button.follow-button.not-following Follow 
+              button.follow-button.not-following Following
 
   script(src="/follow.js")

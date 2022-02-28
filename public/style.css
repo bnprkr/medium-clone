@@ -30,3 +30,7 @@ button.like-button.liked {
   justify-content: center;
   gap: 50px;
 }
+
+.follow-button.following {
+  background-color: #008CBA;
+}
