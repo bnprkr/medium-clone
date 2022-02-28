@@ -22,12 +22,7 @@ const router = express.Router();
 
 router.use(requireAuth);
 
-
-// NOTE - BASIC ROUTES FOR NOW, MORE NEEDED ON HOW TO IMPLEMENT THESE ROUTES
-// AND SO HOW TO HANDLE SUCCESS/FAILURE FOR EACH ROUTE...
-
 // get like status for story
-
 router.get('/stories/:storyId/like',
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
@@ -47,8 +42,6 @@ router.get('/stories/:storyId/like',
     }
   })
 );
-
-
 
 router.post('/stories/:storyId/like',
   asyncHandler(async (req, res) => {
