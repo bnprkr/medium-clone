@@ -2,10 +2,7 @@ const followButtons = document.querySelectorAll("button.follow-button");
 
 followButtons.forEach((button) => {
   button.addEventListener("click", async (event) => {
-    console.log(event.target.classList);
-  
     const followId = event.target.parentNode.id;
-    console.log(followId);
   
     try {
       const res = await fetch(`http://localhost:8080/api/users/${followId}/follow`, {
