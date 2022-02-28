@@ -25,7 +25,7 @@ button.like-button.liked {
   background-color: #008CBA;
 }
 
-.follows {
+.follows-container {
   display: flex;
   justify-content: center;
   gap: 50px;
