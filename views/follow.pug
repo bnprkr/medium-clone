@@ -4,20 +4,21 @@ include utils.pug
 
 block content 
   main 
-    .follows 
-      .following
+    .follows-container
+      .following-container
         h2 Following
-        each follow in following 
-          .follow-box 
-            h3.username #{follow.username}
-            button.follow-button.following(id=`${follow.id}`) Follow 
+        .following-box-container
+          each follow in following 
+            .follow-box(id=`${follow.id}`) 
+              h3.username #{follow.username}
+              button.follow-button.following Follow 
             
-      .not-following
+      .not-following-container
         h2 Not following
-        each follow in notFollowing 
-          .follow-box 
-            h3.username #{follow.username}
-              follow.username 
-            button.follow-button.not-following(id=`${follow.id}`) Follow 
+        .not-following-box-container
+          each follow in notFollowing 
+            .follow-box(id=`${follow.id}`) 
+              h3.username #{follow.username}
+              button.follow-button.not-following Follow 
 
   script(src="/follow.js")
