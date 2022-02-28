@@ -152,29 +152,29 @@ router.get('/users/:userId/follow',
     });
 
     if (follow) {
-      return res.send({ following: true });
+      return res.json({ following: true });
     } else {
-      return res.send({ following: false });
+      return res.json({ following: false });
     }
 
   })
 );
 
-router.post('/users/:userId/follow/:followId',
+router.post('/users/:userId/follow',
   asyncHandler(async (req, res) => {
-    const userId = req.params.userId;
-    const followingUserId = req.params.followId;
+    const currentUserId = res.locals.user.id;
+    const followingUserId = req.params.userId;
 
     const follow = await Follow.findOne({
       where: {
-        userId,
+        userId: currentUserId,
         followingUserId,
       }
     });
 
     if (!follow) {
       // create like
-      const newFollow = await Follow.create({ userId, followingUserId });
+      const newFollow = await Follow.create({ userId: currentUserId, followingUserId });
 
       if (newFollow) {
         return res.status(201).end();
@@ -190,14 +190,14 @@ router.post('/users/:userId/follow/:followId',
   })
 );
 
-router.delete('/users/:userId/follow/:followId',
+router.delete('/users/:userId/follow',
   asyncHandler(async (req, res) => {
-    const userId = req.params.userId;
-    const followingUserId = req.params.followId;
+    const currentUserId = res.locals.user.id;
+    const followingUserId = req.params.userId;
 
     const follow = await Follow.findOne({
       where: {
-        userId,
+        userId: currentUserId,
         followingUserId,
       }
     });
