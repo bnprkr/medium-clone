@@ -23,12 +23,11 @@ followButtons.forEach((button) => {
         if (deleteFollow.ok) {
           event.target.classList.remove("following");
           event.target.classList.add("not-following");
-  
-          // get html for following box, add this to not following column and remove from following
-          const followHtml = event.target.parentNode.outerHTML;
+
+          // move node to not following container
+          const followNode = event.target.parentNode;
           const notFollowing = document.querySelector(".not-following-box-container");
-          notFollowing.innerHTML = followHtml + notFollowing.innerHTML;
-          event.target.parentNode.outerHTML = '';
+          notFollowing.prepend(followNode);
   
         } else {
           // error handle delete follow failed?
@@ -43,12 +42,11 @@ followButtons.forEach((button) => {
         if (addFollow.ok) {
           event.target.classList.remove("not-following");
           event.target.classList.add("following");
-  
-          // get html for following box, add this to not following column and remove from following
-          const notFollowingHtml = event.target.parentNode.outerHTML;
+
+          // move node to following container
+          const followNode = event.target.parentNode;
           const following = document.querySelector(".following-box-container");
-          following.innerHTML = notFollowingHtml + following.innerHTML;
-          event.target.parentNode.outerHTML = '';
+          following.prepend(followNode);
   
         } else {
           // error handle add follow failed?
