@@ -172,7 +172,7 @@ router.get('/me/follow',
     // username, followers, following, #stories authored
 
     const userId = res.locals.user.id;
-
+      
     const following = await Follow.findAll({
       where: { userId },
       include: [User]
@@ -199,7 +199,7 @@ router.get('/me/follow',
       }
     });
 
-    return res.send({ followingData, notFollowingData });
+    return res.render('follow', { following: followingData, notFollowing: notFollowingData });
   })
 );
 
