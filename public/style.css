@@ -34,3 +34,7 @@ button.like-button.liked {
 .follow-button.following {
   background-color: #008CBA;
 }
+
+.not-following-container, .following-container {
+  width: 150px;
+}
