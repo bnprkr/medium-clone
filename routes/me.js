@@ -180,6 +180,7 @@ router.get('/me/follow',
 
     const followingData = following.map(follow => {
       return {
+        id: follow.User.id,
         username: follow.User.username,
         // following: follow.User.Follows.length
       }
@@ -195,6 +196,7 @@ router.get('/me/follow',
 
     const notFollowingData = notFollowing.map(user => {
       return {
+        id: user.id,
         username: user.username
       }
     });
