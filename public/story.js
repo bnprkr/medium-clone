@@ -8,7 +8,6 @@ likeButton.addEventListener("click", async (event) => {
   console.log(storyId);
 
   const likes = document.querySelector(".story-likes > span");
-  const numLikes = parseInt(likes.innerHTML);
 
   try {
     // const res = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
@@ -31,10 +30,11 @@ likeButton.addEventListener("click", async (event) => {
 
       if (deleteLike) {
         event.target.classList.remove("liked");
+        likes.innerHTML = parseInt(likes.innerHTML) - 1;
       } else {
         // error handle failed like delete?
       }
-      
+
     } else {
       const addLike = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
         method: 'POST',
@@ -42,27 +42,11 @@ likeButton.addEventListener("click", async (event) => {
 
       if (addLike) {
         event.target.classList.add("liked");
+        likes.innerHTML = parseInt(likes.innerHTML) + 1;
       }
     }
 
   } catch (e) {
     console.log(e);
   }
-
-
-  // if liked:
-  // delete like
-  // remove liked from class list
-
-  // if not liked:
-  // add like
-  // add liked to class list
-
-  // don't trust class list as can be altered by user!
-
-  // get liked status.. 
-
-
-
-
 });
