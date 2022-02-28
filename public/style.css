@@ -3,6 +3,15 @@ main {
   margin: auto;
 }
 
+.form-inline {
+  display: inline;
+}
+
+nav.navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
 .story-box-bottom-bar {
   display: flex;
   justify-content: space-between;

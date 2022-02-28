@@ -7,4 +7,26 @@ html(lang="en")
     link(rel="stylesheet", type="text/css" href="/style.css")
     title #{title}
   body 
+    nav.navbar
+      .nav-left 
+        a(href="/") A Lesser Medium
+        a(href="/me/stories") Stories
+        a(href="/me/follow") Follow
+      .nav-right 
+        if locals.authenticated 
+          span Welcome #{locals.user.username}!
+          form(class="form-inline" action="/logout" method="post")
+            button(type="submit") Logout
+        else 
+          a(href="/login") Login 
+          a(href="/register") Register  
+        
+        
+
+
+
+
+
+
+
     block content
