@@ -31,10 +31,22 @@ followButton.addEventListener("click", async (event) => {
         event.target.classList.remove("following");
         event.target.classList.add("not-following");
       } else {
-        // error handle delete failed?
+        // error handle delete follow failed?
         console.log(deleteFollow);
       }
     } else {
+
+      const addFollow = await fetch(`http://localhost:8080/api/users/${followId}/follow`, {
+        method: 'POST'
+      });
+
+      if (addFollow.ok) {
+        event.target.classList.remove("not-following");
+        event.target.classList.add("following");
+      } else {
+        // error handle add follow failed?
+        console.log(addFollow);
+      }
 
     }
 
