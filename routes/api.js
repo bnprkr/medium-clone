@@ -28,6 +28,26 @@ router.use(requireAuth);
 
 // get like status for story
 
+router.get('/stories/:storyId/like',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const storyId = req.params.storyId;
+
+    const like = await StoryLike.findOne({
+      where: {
+        userId,
+        storyId,
+      }
+    });
+
+    if (like) {
+      return res.json({ liked: true });
+    } else {
+      return res.json({ liked: false });
+    }
+  })
+);
+
 
 
 router.post('/stories/:storyId/like',
