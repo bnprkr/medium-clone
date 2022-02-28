@@ -24,3 +24,9 @@ textarea {
 button.like-button.liked {
   background-color: #008CBA;
 }
+
+.follows {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
