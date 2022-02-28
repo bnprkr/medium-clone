@@ -11,15 +11,38 @@ likeButton.addEventListener("click", async (event) => {
   const numLikes = parseInt(likes.innerHTML);
 
   try {
+    // const res = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
+    //   method: 'POST',
+    // });
+
     const res = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
-      method: 'POST',
+      method: 'GET',
     });
 
-    if (res.ok) {
-      likes.innerHTML = numLikes + 1;
-      event.target.classList.add("liked");
-    } else {
+    const { liked } = await res.json();
+
+    console.log(liked);
+
+    if (liked) {
+      // if liked delete like
+      const deleteLike = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
+        method: 'DELETE',
+      });
+
+      if (deleteLike) {
+        event.target.classList.remove("liked");
+      } else {
+        // error handle failed like delete?
+      }
       
+    } else {
+      const addLike = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
+        method: 'POST',
+      });
+
+      if (addLike) {
+        event.target.classList.add("liked");
+      }
     }
 
   } catch (e) {
