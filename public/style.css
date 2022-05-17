@@ -6,7 +6,17 @@
   --warm-grey-2: hsl(39, 16%, 76%);
   --warm-grey-1: hsl(39, 21%, 88%);
 
-  --size-1: 
+  --size-1: 72px;
+  --size-2: 60px;
+  --size-3: 48px;
+  --size-4: 36px;
+  --size-5: 30px;
+  --size-6: 24px;
+  --size-7: 20px;
+  --size-8: 18px;
+  --size-9: 16px;
+  --size-10: 14px;
+  --size-11: 12px;
 }
 
 main {
