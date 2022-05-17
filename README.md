@@ -11,4 +11,14 @@ npx dotenv sequelize-cli db:migrate
 npx dotenv sequelize-cli db:seed:all
 
 ## Create session
+added create table if doesn't exist option to connect-pg-simple session store
+
+## font sizes
+12, 14, 16, 18, 20, 24, 30, 36, 48, 60, 72
+
+## fonts
+system stack as default
+-apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue;
+
+
 
