@@ -1,3 +1,14 @@
+:root {
+  --warm-grey-6: hsl(41 15% 14%);
+  --warm-grey-5: hsl(41 15% 28%);
+  --warm-grey-4: hsl(40, 12%, 43%);
+  --warm-grey-3: hsl(39, 12%, 58%);
+  --warm-grey-2: hsl(39, 16%, 76%);
+  --warm-grey-1: hsl(39, 21%, 88%);
+
+  --size-1: 
+}
+
 main {
   width: 750px;
   margin: auto;

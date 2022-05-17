@@ -19,6 +19,11 @@ added create table if doesn't exist option to connect-pg-simple session store
 ## fonts
 system stack as default
 -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue;
+// sans-serif (choose one) for titles, names, etc. 
+// serif font for article text.. 
+
+## colors
+
 
 
 
