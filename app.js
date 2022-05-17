@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const session = require('express-session');
-const store = require('connect-pg-simple');
+const store = require('connect-pg-simple')(session);
 const cookieParser = require('cookie-parser');
 const path = require("path");
 
@@ -19,7 +19,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(secret));
 app.use(session({
   // note secure cookie needed in production with expiry time...
-  store: new (store(session))(),
+  store: new store({
+    createTableIfMissing: true,
+  }),
   secret,
   resave: false,
   saveUninitialized: false
