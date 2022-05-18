@@ -15,17 +15,19 @@ mixin storyPreviews(stories)
   each story in stories 
     article 
       .story-box 
-        .story-author 
-          p #{story.author}
         .story-title 
           h2 #{story.title} 
+        .story-author 
+          p #{story.author}
         .story-text
           each para in story.sample.split('\n')
             p #{para}
         .story-box-bottom-bar 
           .left 
             .story-likes
-              span #{story.numLikes} Likes
+              span.likes-num #{story.numLikes} 
+              span Likes
           .right 
             .story-comments 
-              span #{story.numComments} Comments
+              span.comments-num #{story.numComments} 
+              span Comments
