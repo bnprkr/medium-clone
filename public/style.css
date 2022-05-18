@@ -23,17 +23,34 @@ a {
   --blue-2: hsl(210, 100%, 50%);
   --blue-3: hsl(210, 100%, 75%);
 
-  --size-1: 72px;
-  --size-2: 60px;
-  --size-3: 48px;
-  --size-4: 36px;
-  --size-5: 30px;
-  --size-6: 24px;
-  --size-7: 20px;
-  --size-8: 18px;
-  --size-9: 16px;
-  --size-10: 14px;
-  --size-11: 12px;
+  --font-size-1: 72px;
+  --font-size-2: 60px;
+  --font-size-3: 48px;
+  --font-size-4: 36px;
+  --font-size-5: 30px;
+  --font-size-6: 24px;
+  --font-size-7: 20px;
+  --font-size-8: 18px;
+  --font-size-9: 16px;
+  --font-size-10: 14px;
+  --font-size-11: 12px;
+
+  --space-size-1: 768px;
+  --space-size-2: 640px;
+  --space-size-3: 512px;
+  --space-size-4: 384px;
+  --space-size-5: 256px;
+  --space-size-6: 192px;
+  --space-size-7: 128px;
+  --space-size-8: 96px;
+  --space-size-9: 64px;
+  --space-size-10: 48px;
+  --space-size-11: 32px;
+  --space-size-12: 24px;
+  --space-size-13: 16px;
+  --space-size-14: 12px;
+  --space-size-15: 8px;
+  --space-size-16: 4px;
 
   --default-fonts: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
@@ -44,7 +61,8 @@ html {
 }
 
 main {
-  width: 750px;
+  width: 600px;
+  /* width: 750px; */
   margin: auto;
 }
 
@@ -93,12 +111,12 @@ article {
   margin-bottom: 36px;
 }
 
-.story-title {
+.story-box>.story-title {
   padding-bottom: 4px;
 }
 
-.story-author,
-.story-text {
+.story-box>.story-author,
+.story-box>.story-text {
   padding-bottom: 16px;
 }
 
@@ -110,12 +128,16 @@ article {
 
 .story-box>.story-text {
   font-family: 'EB Garamond';
-  font-size: var(--size-9);
+  font-size: var(--font-size-9);
   width: 35em;
 }
 
+.story-box>.story-title {
+  font-size: var(--font-size-9);
+}
+
 .story-box-bottom-bar, .story-author {
-  font-size: var(--size-11);
+  font-size: var(--font-size-11);
   color: var(--grey-2);
 }
 
@@ -135,4 +157,27 @@ article {
 .nav-left, .nav-right {
   display: flex;
   gap: 15px;
+}
+
+/* full story page */
+p + p {
+  margin-top: var(--space-size-14);
+}
+
+.story-box-full>.story-text {
+  font-family: 'EB Garamond';
+  font-size: var(--font-size-7);
+  width: 35em;
+}
+
+.story-box-full>.story-title {
+  font-size: var(--font-size-7);
+}
+
+.story-box-full>.story-title {
+  padding-bottom: var(--space-size-13);
+}
+
+.story-box-full>.story-text {
+  padding-bottom: var(--space-size-12);
 }
