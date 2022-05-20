@@ -28,18 +28,18 @@ block content
     .comments 
       .comment-form
         form(action="")
-          .comment-title 
-            textarea(name="commentTitle" cols="45" rows="1" placeholder="Title")
+          //- .comment-title 
+          //-   textarea(name="commentTitle" cols="45" rows="1" placeholder="Title")
           .comment-text 
             textarea(name="commentText" cols="45" rows="5" placeholder="Comment")
           .comment-submit 
             input(type="submit", value="Add comment")
       each comment in story.comments 
         .comment-box 
+          //- .comment-title 
+          //-   h3 #{comment.title}        
           .comment-author 
             | #{comment.author}
-          .comment-title 
-            h3 #{comment.title}
           .comment-text 
             each para in comment.text.split('\n')
               p #{para}
