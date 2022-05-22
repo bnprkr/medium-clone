@@ -13,13 +13,13 @@ block content
             p #{para}
         .story-box-bottom-bar 
           .left 
-            .story-likes
-              span #{story.numLikes} 
             .story-like-button
               if story.liked 
                 button.like-button.liked Like
               else 
-                button.like-button Like
+                button.like-button Like          
+            .story-likes
+              span #{story.numLikes} 
           .right 
             if story.myStory
               .edit-delete
@@ -31,7 +31,7 @@ block content
           //- .comment-title 
           //-   textarea(name="commentTitle" cols="45" rows="1" placeholder="Title")
           .comment-text 
-            textarea(name="commentText" cols="45" rows="5" placeholder="Comment")
+            textarea(name="commentText" cols="45" rows="5" placeholder="Comment..")
           .comment-submit 
             input(type="submit", value="Add comment")
       each comment in story.comments 
