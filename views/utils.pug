@@ -12,22 +12,24 @@ mixin field(labelText, fieldName, fieldValue, fieldType = 'text')
     input(type=fieldType id=fieldName name=fieldName value=fieldValue)
 
 mixin storyPreviews(stories)
-  each story in stories 
-    article 
-      .story-box 
-        .story-title 
-          h2 #{story.title} 
-        .story-author 
-          p #{story.author}
-        .story-text
-          each para in story.sample.split('\n')
-            p #{para}
-        .story-box-bottom-bar 
-          .left 
-            .story-likes
-              span.likes-num #{story.numLikes} 
-              span Likes
-          .right 
-            .story-comments 
-              span.comments-num #{story.numComments} 
-              span Comments
+  .stories-container
+    .my-stories
+      each story in stories 
+        article 
+          .story-box 
+            .story-title 
+              h2 #{story.title} 
+            .story-author 
+              p #{story.author}
+            .story-text
+              each para in story.sample.split('\n')
+                p #{para}
+            .story-box-bottom-bar 
+              .left 
+                .story-likes
+                  span.likes-num #{story.numLikes} 
+                  span Likes
+              .right 
+                .story-comments 
+                  span.comments-num #{story.numComments} 
+                  span Comments
