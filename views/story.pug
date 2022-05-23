@@ -5,26 +5,27 @@ include utils.pug
 block content 
   main 
     article 
-      .story-box-full
-        .story-title 
-          h2 #{story.title} 
-        .story-text
-          each para in story.text.split('\n')
-            p #{para}
-        .story-box-bottom-bar 
-          .left 
-            .story-like-button
-              if story.liked 
-                i.fa-solid.fa-heart.like-button.liked
-              else 
-                i.fa-solid.fa-heart.like-button        
-            .story-likes
-              span #{story.numLikes}
-          .right 
-            if story.myStory
-              .edit-delete
-                a(href="/me/stories/" + `${story.storyId}` + "/edit") Edit 
-                a(href="/me/stories/" + `${story.storyId}` + "/delete") Delete
+      .story-container
+        .story-box-full
+          .story-title 
+            h2 #{story.title} 
+          .story-text
+            each para in story.text.split('\n')
+              p #{para}
+          .story-box-bottom-bar 
+            .left 
+              .story-like-button
+                if story.liked 
+                  i.fa-solid.fa-heart.like-button.liked
+                else 
+                  i.fa-solid.fa-heart.like-button        
+              .story-likes
+                span #{story.numLikes}
+            .right 
+              if story.myStory
+                .edit-delete
+                  a(href="/me/stories/" + `${story.storyId}` + "/edit") Edit 
+                  a(href="/me/stories/" + `${story.storyId}` + "/delete") Delete
     .comments 
       .comment-form
         form(action="")
