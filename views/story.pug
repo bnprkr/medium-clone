@@ -15,11 +15,11 @@ block content
           .left 
             .story-like-button
               if story.liked 
-                button.like-button.liked Like
+                i.fa-solid.fa-heart.like-button.liked
               else 
-                button.like-button Like          
+                i.fa-solid.fa-heart.like-button        
             .story-likes
-              span #{story.numLikes} 
+              span #{story.numLikes}
           .right 
             if story.myStory
               .edit-delete
