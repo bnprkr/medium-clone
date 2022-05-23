@@ -4,17 +4,19 @@ include utils.pug
 
 block content 
   main
-    .edit-story
-      .edit-story-form
-        form(action="")
-          .edit-title
-            textarea(name="commentTitle" cols="75" rows="1")
-              | #{story.title}
-          .edit-text
-            textarea(name="commentText" cols="75" rows="35")
-              each para, index in story.text.split('\n')
-                if index > 0
-                  | &#13;&#10;&#13;&#10;
-                | #{para}
-          .edit-submit 
-            input(type="submit", value="Edit Story")
+    .edit-story-container
+      .edit-story
+        .edit-page-title Edit Story
+        .edit-story-form
+          form(action="")
+            .edit-title
+              textarea(name="commentTitle" spellcheck="false" cols="75" rows="1")
+                | #{story.title}
+            .edit-text
+              textarea(name="commentText" spellcheck="false" cols="75" rows="30")
+                each para, index in story.text.split('\n')
+                  if index > 0
+                    | &#13;&#10;&#13;&#10;
+                  | #{para}
+            .edit-submit 
+              input(type="submit", value="Edit Story")

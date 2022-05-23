@@ -11,6 +11,12 @@ a {
   text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+
 :root {
   /* warm greys */
   --grey-1: hsl(41 15% 14%);
@@ -295,10 +301,6 @@ p + p {
   border: 1px solid var(--grey-5);
   border-radius: 20px;
   padding: var(--space-size-13);
-  margin-bottom: var(--space-size-15); 
-}
-
-.follow-box {
   margin-bottom: var(--space-size-11);
 }
 
@@ -322,5 +324,76 @@ p + p {
 }
 
 .follow-button:hover {
+  background-color: var(--grey-6);
+}
+
+
+/* story edit page */
+
+.edit-story-container {
+  display: flex;
+  justify-content: center;
+}
+
+.edit-story {
+  display: inline-block;
+  margin-bottom: var(--space-size-12);
+}
+
+.edit-story-form { 
+  /* padding: var(--space-size-14); */
+  border: 1px solid var(--grey-5);
+  border-radius: 20px;
+}
+
+.edit-page-title {
+  display: flex;
+  justify-content: right;
+  font-weight: 400;
+  color: var(--grey-2);
+  font-family: var(--default-sans-serif);
+  font-size: var(--font-size-9);
+  margin-bottom: var(--space-size-16);
+}
+
+.edit-page-title,
+.edit-story-form {
+  padding: var(--space-size-12);
+}
+
+.edit-title>textarea {
+  width: 35em;
+  /* padding: var(--space-size-16); */
+  border: none;
+  font-weight: 600;
+  font-family: var(--default-sans-serif);
+  font-size: var(--font-size-7);
+  margin-bottom: var(--space-size-13);
+}
+
+.edit-text>textarea {
+  width: 35em;
+  /* padding: var(--space-size-16); */
+  border: none;
+  font-family: var(--default-serif);
+  font-size: var(--font-size-7);
+  margin-bottom: var(--space-size-13);
+}
+
+.edit-submit {
+  display: flex;
+  justify-content: right;
+  padding: var(--space-size-16);
+}
+
+.edit-submit>input {
+  margin-left: auto;
+  padding: var(--space-size-15);  
+  border: 1px solid var(--grey-4);
+  border-radius: 5px;
+  color: var(--grey-2);
+}
+
+.edit-submit>input:hover {
   background-color: var(--grey-6);
 }
