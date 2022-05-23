@@ -185,6 +185,19 @@ p + p {
   padding-bottom: var(--space-size-12);
 }
 
+.story-like-button, 
+.story-likes {
+  display: inline-block;
+}
+
+.story-likes {
+  margin-left: var(--space-size-15);
+}
+
+.liked {
+  color: red;
+}
+
 /* full story page comments area */
 /* comment input form */
 
@@ -204,6 +217,10 @@ p + p {
 }
 
 .comment-text>textarea {
+  font-size: var(--font-size-7);
+}
+
+.comment-text>textarea::placeholder {
   font-size: var(--font-size-6);
 }
 
@@ -232,15 +249,17 @@ p + p {
   padding: var(--space-size-14);
   border: 1px solid var(--grey-5);
   border-radius: 20px;
+  color: var(--grey-2);
+  font-family: var(--default-sans-serif);
+  font-size: var(--font-size-10);
+  line-height: var(--space-size-12);
 }
 
 .comment-box>.comment-author {
-  font-family: var(--default-sans-serif);
-  font-size: var(--font-size-9);
-  margin-bottom: var(--space-size-15);
+  margin-bottom: var(--space-size-14);
+  font-weight: 500;
 }
 
-.comment-box>.comment-text {
-  font-family: var(--default-serif);
-  font-size: var(--font-size-8);
-}
+/* .comment-box>.comment-text {
+  font-size: var(--font-size-9);
+} */
