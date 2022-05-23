@@ -1,4 +1,4 @@
-const likeButton = document.querySelector("button.like-button");
+const likeButton = document.querySelector("i.like-button");
 
 likeButton.addEventListener("click", async (event) => {
   console.log(event.target.classList);
