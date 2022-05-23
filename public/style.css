@@ -75,24 +75,6 @@ textarea {
   resize: none;
 }
 
-button.like-button.liked {
-  background-color: #008CBA;
-}
-
-.follows-container {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-}
-
-.follow-button.following {
-  background-color: #008CBA;
-}
-
-.not-following-container, .following-container {
-  width: 150px;
-}
-
 
 /* navigation bar */
 
@@ -121,11 +103,11 @@ button.like-button.liked {
 }
 
 article:first-of-type {
-  margin-top: 36px;
+  margin-top: var(--space-size-11);
 }
 
 article {
-  margin-bottom: 36px;
+  margin-bottom: var(--space-size-11);
 }
 
 .story-box>.story-title {
@@ -277,7 +259,6 @@ p + p {
 }
 
 .comment-box {
-  /* width: var(--space-size-3); */
   margin: var(--space-size-12) 0;
   padding: var(--space-size-14);
   border: 1px solid var(--grey-5);
@@ -291,4 +272,55 @@ p + p {
 .comment-box>.comment-author {
   margin-bottom: var(--space-size-14);
   font-weight: 500;
+}
+
+
+/* follows page */
+
+.follows-container {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-size-11);
+}
+
+.follows-container h2 {
+  padding: var(--space-size-12) var(--space-size-13);
+  color: var(--grey-2);
+  font-size: var(--font-size-6);
+  font-weight: 600;
+}
+
+.follow-box {
+  width: var(--space-size-5);
+  border: 1px solid var(--grey-5);
+  border-radius: 20px;
+  padding: var(--space-size-13);
+  margin-bottom: var(--space-size-15); 
+}
+
+.follow-box {
+  margin-bottom: var(--space-size-11);
+}
+
+.follow-username {
+  color: var(--grey-2);
+  font-size: var(--font-size-10);
+  font-weight: 500;
+  margin-bottom: var(--space-size-14);
+}
+
+.follow-select {
+  display: flex;
+  justify-content: right;
+}
+
+.follow-button {
+  padding: var(--space-size-15);  
+  border: 1px solid var(--grey-4);
+  border-radius: 5px;
+  color: var(--grey-2);
+}
+
+.follow-button:hover {
+  background-color: var(--grey-6);
 }
