@@ -5,12 +5,14 @@ include utils.pug
 block content 
   main
     +validationErrorSummary(errors)
-    form(action='/register', method='post')
-      input(type='hidden', name='_csrf', value=csrfToken)
-      +field('Email address', 'email', user.email)
-      +field('Username', 'username', user.username)
-      +field('Password', 'password', user.password, 'password')
-      +field('Confirm password', 'confirmPassword', '', 'password')
-      div 
-        button(type='submit') Register 
-        a(href='/') Cancel
+    .register-form-container 
+      .register-form 
+        form(action='/register', method='post')
+          .register-form-inputs
+            input(type='hidden', name='_csrf', value=csrfToken)
+            +field('Email', 'email', user.email)
+            +field('Username', 'username', user.username)
+            +field('Password', 'password', user.password, 'password')
+            +field('Confirm password', 'confirmPassword', '', 'password')
+          .register-form-buttons
+            button(type='submit').register Register 

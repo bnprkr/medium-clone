@@ -478,3 +478,56 @@ p + p {
 
 
 /* registration form */
+
+.register-form-container {
+  display: flex;
+  justify-content: center;
+}
+
+.register-form {
+  display: inline-block;
+  border: 1px solid var(--grey-5);
+  border-radius: 20px;
+  padding: var(--space-size-11);
+  margin-top: var(--space-size-9);
+}
+
+.register-form-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register-form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-size-12);
+  margin-top: var(--space-size-11);
+}
+
+.register-form-inputs label {
+  float: left;
+  text-align: right;
+  margin-right: var(--space-size-11);
+  width: var(--space-size-6);
+}
+
+.register-form-buttons {
+  display: flex;
+  justify-content: right;
+  margin-top: var(--space-size-11);
+}
+
+.register-form-buttons>.register {
+  font-family: var(--default-sans-serif);
+  font-size: var(--font-size-12);
+  color: var(--grey-1);
+  padding: var(--space-size-15);  
+  border: 1px solid var(--grey-4);
+  border-radius: 5px;
+  background-color: var(--grey-6);
+}
+
+.register-form-buttons>.register:hover {
+  background-color: var(--grey-5);
+}
