@@ -25,6 +25,7 @@ h1, h2, h3, h4, h5, h6 {
   --grey-4: hsl(39, 12%, 58%);
   --grey-5: hsl(39, 16%, 76%);
   --grey-6: hsl(39, 21%, 88%);
+  --grey-7: hsl(39, 0%, 90%);
 
   --blue-1: hsl(210, 100%, 25%);
   --blue-2: hsl(210, 100%, 50%);
@@ -97,7 +98,15 @@ textarea {
 }
 
 
-/* story box styling (my-stories) */
+/* story box styling (my-stories and feed/homepage) */
+
+a.story-box {
+  display: block;
+}
+
+a.story-box:hover {
+  background-color: var(--grey-7);
+}
 
 .stories-container {
   display: flex;

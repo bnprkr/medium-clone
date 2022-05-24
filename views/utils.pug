@@ -11,12 +11,17 @@ mixin field(labelText, fieldName, fieldValue, fieldType = 'text')
     label(for=fieldName)= labelText
     input(type=fieldType id=fieldName name=fieldName value=fieldValue)
 
-mixin storyPreviews(stories)
+mixin storyPreviews(stories, source)
   .stories-container
     .my-stories
       each story in stories 
         article 
-          .story-box 
+          if source === 'my-stories'
+            - var link = `/me/stories/${story.id}`;
+          else if source === 'feed'
+            - var link = `../@${story.author}/stories/${story.id}`;
+
+          a(href=`${link}`).story-box
             .story-title 
               h2 #{story.title} 
             .story-author 

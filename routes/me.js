@@ -50,6 +50,7 @@ router.get('/',
 
     const storiesData = stories.map(story => {
       return {
+        id: story.id,
         title: story.title,
         authorId: story.userId,
         author: story.User.username,
@@ -79,6 +80,7 @@ router.get('/me/stories',
 
     const storiesData = stories.map(story => {
       return {
+        id: story.id,
         title: story.title,
         authorId: story.userId,
         author: story.User.username,
