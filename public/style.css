@@ -418,12 +418,24 @@ p + p {
   margin-top: var(--space-size-9);
 }
 
-.login-form label {
+.login-form-inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-size-12);
+  margin-top: var(--space-size-11);
+}
+
+.login-form-inputs label {
   float: left;
   text-align: right;
   margin-right: var(--space-size-11);
   width: var(--space-size-9);
-
 }
 
 .login-form-buttons {
@@ -450,37 +462,19 @@ p + p {
   background-color: var(--grey-6);
 }
 
+.login-form-buttons>.demo-login:hover,
+.login-form-buttons>.login:hover {
+  background-color: var(--grey-4);
+}
+
+.login-form-buttons>.login {
+  background-color: var(--grey-6);
+}
+
 .login-form-buttons>.register {
   padding: var(--space-size-15); 
   text-decoration: underline; 
-
 }
 
 
-
-
-.comment-text>textarea {
-  padding: var(--space-size-16);
-  border: none;
-  font-family: var(--default-sans-serif);
-  font-size: var(--font-size-10);
-  line-height: var(--space-size-12);
-  color: var(--grey-2);
-}
-
-.comment-text>textarea::placeholder {
-  font-family: var(--default-serif);
-  font-size: var(--font-size-6);
-}
-
-.comment-submit>input {
-  background-color: transparent;
-  padding: var(--space-size-15);  
-  border: 1px solid var(--grey-4);
-  border-radius: 5px;
-  color: var(--grey-2);
-}
-
-.comment-submit>input:hover {
-  background-color: var(--grey-6);
-}
+/* registration form */
