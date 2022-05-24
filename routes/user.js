@@ -96,6 +96,45 @@ router.post('/login', csrfProtection, loginValidators,
   })
 );
 
+// loads email/password combination from .env to use as demo account
+router.post('/demo-login', csrfProtection, loginValidators, 
+  asyncHandler(async (req, res) => {
+    const {
+      email, 
+      password
+    } = require('../config').user;
+
+    let errors = [];
+    const validatorErrors = validationResult(req);
+
+    if (validatorErrors.isEmpty()) {
+      const user = await db.User.findOne({ where: { email }});
+
+      if (user !== null) {
+        const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+
+        if (passwordMatch) {
+          loginUser(req, res, user);
+          return res.redirect('/');
+        }
+      }
+
+      errors.push('Login failed for the provided email address and password.');
+    
+    } else {
+      errors = validatorErrors.array().map(errorObj => errorObj.msg);
+    }
+
+    res.render('login', {
+      title: 'Login', 
+      email, 
+      errors, 
+      csrfToken: req.csrfToken(),
+    });
+
+  })
+);
+
 router.post('/logout', (req, res) => {
   logoutUser(req, res);
   return res.redirect('/login');
