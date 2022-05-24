@@ -2,7 +2,7 @@ const followButtons = document.querySelectorAll("button.follow-button");
 
 followButtons.forEach((button) => {
   button.addEventListener("click", async (event) => {
-    const followId = event.target.parentNode.id;
+    const followId = event.target.parentNode.parentNode.id;
   
     try {
       const res = await fetch(`http://localhost:8080/api/users/${followId}/follow`, {
@@ -20,9 +20,10 @@ followButtons.forEach((button) => {
         if (deleteFollow.ok) {
           event.target.classList.remove("following");
           event.target.classList.add("not-following");
+          event.target.textContent = "Follow";
 
           // move node to not following container
-          const followNode = event.target.parentNode;
+          const followNode = event.target.parentNode.parentNode;
           const notFollowing = document.querySelector(".not-following-box-container");
           notFollowing.prepend(followNode);
   
@@ -39,9 +40,10 @@ followButtons.forEach((button) => {
         if (addFollow.ok) {
           event.target.classList.remove("not-following");
           event.target.classList.add("following");
+          event.target.textContent = "Unfollow";
 
           // move node to following container
-          const followNode = event.target.parentNode;
+          const followNode = event.target.parentNode.parentNode;
           const following = document.querySelector(".following-box-container");
           following.prepend(followNode);
   
