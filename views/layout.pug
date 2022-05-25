@@ -9,17 +9,23 @@ html(lang="en")
     title #{title}
   body 
     nav.navbar
-      .nav-left 
-        a(href="/") LoremIpsumMedium
-        a(href="/me/stories") My Stories
-        a(href="/me/follow") Follow
-      .nav-right 
-        if locals.authenticated 
-          span Welcome #{locals.user.username}!
-          form(class="form-inline" action="/logout" method="post")
-            button(type="submit") Logout
+      ul.menu
+        li.logo
+          a(href="/") LoremIpsumMedium
+        if locals.authenticated
+          li.item
+            a(href="/me/stories") My Stories
+          li.item
+            a(href="/me/follow") Follow
+          //- li.welcome
+          //-   span Welcome #{locals.user.username}!
+          li.item
+            form(class="form-inline" action="/logout" method="post")
+              button(type="submit") Logout
         else 
-          a(href="/login") Login 
-          a(href="/register") Register
+          li.item
+            a(href="/login") Login 
+          li.item
+            a(href="/register") Register
 
     block content
