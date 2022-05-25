@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  list-style: none;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
@@ -87,7 +91,33 @@ textarea {
 
 /* navigation bar */
 
-.navbar {
+.menu {
+  display: flex;
+  /* extra for mobile */
+
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+
+  /* justify-content: flex-start; */
+  padding: 15px;
+  background-color: var(--grey-6);
+  gap: var(--space-size-12);
+}
+
+.item {
+  /* order: 3; */
+  width: 100%;
+  /* text-align: center; */
+  /* display: none; */
+}
+
+.logo {
+  flex: 1;
+}
+
+
+/* .navbar {
   display: flex;
   justify-content: space-between;
   padding: 15px;
@@ -97,7 +127,7 @@ textarea {
 .nav-left, .nav-right {
   display: flex;
   gap: 15px;
-}
+} */
 
 
 /* story box styling (my-stories and feed/homepage) */
