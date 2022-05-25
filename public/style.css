@@ -6,6 +6,11 @@
   padding: 0;
 }
 
+html {
+  font-family: var(--default-sans-serif);
+  color: var(--grey-1);
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -64,10 +69,7 @@ h1, h2, h3, h4, h5, h6 {
   --default-serif: 'EB Garamond', Georgia, 'Times New Roman', Times, serif;
 }
 
-html {
-  font-family: var(--default-sans-serif);
-  color: var(--grey-1);
-}
+
 
 .form-inline {
   display: inline;
@@ -144,6 +146,7 @@ article {
   font-family: var(--default-serif);
   font-size: var(--font-size-9);
   width: 35em;
+  min-width: 100px;
 }
 
 .story-box>.story-title {
