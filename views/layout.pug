@@ -12,6 +12,9 @@ html(lang="en")
       ul.menu
         li.logo
           a(href="/") LoremIpsumMedium
+        li.toggle
+          a(href="#")
+            i.fas.fa-bars
         if locals.authenticated
           li.item
             a(href="/me/stories") My Stories
@@ -27,5 +30,8 @@ html(lang="en")
             a(href="/login") Login 
           li.item
             a(href="/register") Register
+
+    script(src="/nav.js")
+    
 
     block content
