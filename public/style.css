@@ -8,6 +8,7 @@
 
 html {
   font-family: var(--default-sans-serif);
+  font-size: var(--font-size-9);
   color: var(--grey-1);
 }
 
@@ -94,6 +95,7 @@ textarea {
 .menu {
   display: flex;
   justify-content: flex-start;
+  align-items: center;
   padding:  var(--space-size-13);
   background-color: var(--grey-6);
   gap: var(--space-size-12);
@@ -105,6 +107,16 @@ textarea {
 
 .toggle {
   display: none;
+}
+
+.logout-btn {
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--default-sans-serif);
+  font-size: var(--font-size-9);
+  border: none;
+  color: var(--grey-1);
 }
 
 @media all and (max-width: 480px) {
@@ -137,9 +149,9 @@ a.story-box {
   display: block;
 }
 
-a.story-box:hover {
+/* a.story-box:hover {
   background-color: var(--grey-7);
-}
+} */
 
 .stories-container {
   display: flex;

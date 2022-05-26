@@ -23,8 +23,8 @@ html(lang="en")
           //- li.welcome
           //-   span Welcome #{locals.user.username}!
           li.item
-            form(class="form-inline" action="/logout" method="post")
-              button(type="submit") Logout
+            form(action="/logout" method="post").form-inline
+              button(type="submit").logout-btn Logout
         else 
           li.item
             a(href="/login") Login 
