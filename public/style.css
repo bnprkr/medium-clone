@@ -317,7 +317,7 @@ p + p {
 
 .comment-text>textarea::placeholder {
   font-family: var(--default-serif);
-  font-size: var(--font-size-6);
+  font-size: var(--font-size-8);
 }
 
 .comment-submit {
@@ -343,7 +343,7 @@ p + p {
 
 /* width of section depends on comment box text */
 .comment-box {
-  width: 30em;
+  width: 35em;
 }
 
 .comment-box {
@@ -353,7 +353,7 @@ p + p {
   border-radius: 20px;
   color: var(--grey-2);
   font-family: var(--default-sans-serif);
-  font-size: var(--font-size-10);
+  font-size: var(--font-size-11);
   line-height: var(--space-size-12);
 }
 
