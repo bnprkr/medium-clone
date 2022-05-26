@@ -10,9 +10,9 @@ block content
         form(action='/register', method='post')
           .register-form-inputs
             input(type='hidden', name='_csrf', value=csrfToken)
-            +field('Email', 'email', user.email)
-            +field('Username', 'username', user.username)
-            +field('Password', 'password', user.password, 'password')
-            +field('Confirm password', 'confirmPassword', '', 'password')
+            +field('Email', 'email', user.email, null, 'Email')
+            +field('Username', 'username', user.username, null, 'Username')
+            +field('Password', 'password', user.password, 'password', 'Password')
+            +field('Confirm password', 'confirmPassword', '', 'password', 'Confirm password')
           .register-form-buttons
             button(type='submit').register Register 
