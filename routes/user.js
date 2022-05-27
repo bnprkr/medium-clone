@@ -6,8 +6,19 @@ const db = require('../db/models');
 const { csrfProtection, asyncHandler } = require('./utils'); 
 const { userValidators, loginValidators } = require('./validators')
 const { loginUser, logoutUser } = require('../auth');
+const { render } = require('../app');
 
 const router = express.Router();
+
+// helper function for login route
+function renderLogin(res, req, email, errors) {
+  res.render('login', {
+    title: 'Login', 
+    email, 
+    errors, 
+    csrfToken: req.csrfToken(),
+  });
+}
 
 router.get('/register', csrfProtection, (req, res) => {
   res.render('register', {
@@ -76,23 +87,23 @@ router.post('/login', csrfProtection, loginValidators,
 
         if (passwordMatch) {
           loginUser(req, res, user);
-          return res.redirect('/');
+          req.session.save((err) => {
+            if (err) return next(err);
+            return res.redirect('/');
+          });
+        } else {
+          errors.push('Login failed for the provided email address and password.');
+          renderLogin(res, req, email, errors);
         }
+      } else {
+        errors.push('Login failed for the provided email address and password.');
+        renderLogin(res, req, email, errors);
       }
-
-      errors.push('Login failed for the provided email address and password.');
     
     } else {
       errors = validatorErrors.array().map(errorObj => errorObj.msg);
+      renderLogin(res, req, email, errors);
     }
-
-    res.render('login', {
-      title: 'Login', 
-      email, 
-      errors, 
-      csrfToken: req.csrfToken(),
-    });
-
   })
 );
 
