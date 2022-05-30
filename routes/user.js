@@ -107,42 +107,40 @@ router.post('/login', csrfProtection, loginValidators,
   })
 );
 
-// loads email/password combination from .env to use as demo account
 router.post('/demo-login', csrfProtection, loginValidators, 
   asyncHandler(async (req, res) => {
-    const {
-      email, 
-      password
-    } = require('../config').user;
+    console.log('you are here...');
 
-    let errors = [];
-    const validatorErrors = validationResult(req);
 
-    if (validatorErrors.isEmpty()) {
-      const user = await db.User.findOne({ where: { email }});
+    // possibilities: 
+    // 1. demo login not requested yet
+    // 2. demo login requested but not created/logged in (possibly failed)
+    // 3. demo login already requested and created and logged in
 
-      if (user !== null) {
-        const passwordMatch = await bcrypt.compare(password, user.hashedPassword.toString());
+    // demo login not requested yet (undefined) or failed (false)
+    // if (!res.locals.demo) {
+    //   res.locals.demo = true;
 
-        if (passwordMatch) {
-          loginUser(req, res, user);
-          return res.redirect('/');
-        }
-      }
+    //   const userId = await requestDemoLogin();
 
-      errors.push('Login failed for the provided email address and password.');
-    
-    } else {
-      errors = validatorErrors.array().map(errorObj => errorObj.msg);
-    }
+    //   console.log(userId);
 
-    res.render('login', {
-      title: 'Login', 
-      email, 
-      errors, 
-      csrfToken: req.csrfToken(),
-    });
-
+    //   if (userId) {
+    //     loginUser(req, res, { userId });
+    //     req.session.save((err) => {
+    //       if (err) return next(err);
+    //       return res.redirect('/');
+    //     });
+    //   } else {
+    //     res.locals.demo = false;
+    //   }
+    // } else {
+    //   // if already logged in, attempt redirect to /
+    //   // else do nothing
+    //   if (req.session.auth) {
+    //     return res.redirect('/');
+    //   }
+    // }
   })
 );
 
