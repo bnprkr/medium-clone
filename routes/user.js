@@ -107,9 +107,9 @@ router.post('/login', csrfProtection, loginValidators,
   })
 );
 
-router.post('/demo-login', csrfProtection, loginValidators, 
+router.get('/demo-login', csrfProtection, loginValidators, 
   asyncHandler(async (req, res) => {
-    console.log('you are here...');
+    console.log('you are in the POST demo-login route...');
 
 
     // possibilities: 
