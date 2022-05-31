@@ -8,7 +8,7 @@ const { userValidators, loginValidators } = require('./validators')
 const { loginUser, logoutUser } = require('../auth');
 const { render } = require('../app');
 const { redirect } = require('express/lib/response');
-const { createUser, createStories } = require('../bin/fakeData');
+const { createUser, generateContent } = require('../bin/fakeData');
 
 const router = express.Router();
 
@@ -139,7 +139,7 @@ router.get('/demo-login',
       demo: true,
     });
 
-    await createStories(user);
+    await generateContent(user);
 
     loginUser(req, res, user);
 
