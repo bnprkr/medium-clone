@@ -8,6 +8,7 @@ const { userValidators, loginValidators } = require('./validators')
 const { loginUser, logoutUser } = require('../auth');
 const { render } = require('../app');
 const { redirect } = require('express/lib/response');
+const { createUser } = require('../bin/fakeData');
 
 const router = express.Router();
 
@@ -110,37 +111,33 @@ router.post('/login', csrfProtection, loginValidators,
 
 router.get('/demo-login',
   asyncHandler(async (req, res) => {
-    // // prevent additional account creation 
-    // // if already logged in..
-    // if (req.session.auth) {
-    //   return res.redirect('/');
-    // }
- 
-    const username = 'randomDemoName';
-    const email = 'username@username.com';
-    const password = 'MCuW7LqDQLVUw9e4';
+    // prevent additional account creation 
+    // if already logged in..
+    if (req.session.auth) {
+      return res.redirect('/');
+    }
+
+    const { 
+      username, 
+      email,
+      hashedPassword
+    } = await createUser();
 
     const user = db.User.build({
       username,
       email,
+      hashedPassword,
       demo: true,
     });
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    user.hashedPassword = hashedPassword;
+    await user.save();
+    loginUser(req, res, user);
 
-    try {
-      await user.save();
-      loginUser(req, res, user);
+    req.session.save((err) => {
+      if (err) return next(err);
+      return res.redirect('/');
+    });
 
-      req.session.save((err) => {
-        if (err) return next(err);
-        return res.redirect('/');
-      });
-
-    } catch (e) {
-      console.log(e);
-    }
   })
 );
 
