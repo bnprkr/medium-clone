@@ -43,6 +43,13 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: true,
       },
     },
+    // demo: {
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: false,
+    //   validate: {
+    //     notEmpty: true,
+    //   },
+    // },
     hashedPassword: {
       type: DataTypes.STRING.BINARY,
       validate: {

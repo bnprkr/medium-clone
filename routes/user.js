@@ -107,10 +107,28 @@ router.post('/login', csrfProtection, loginValidators,
   })
 );
 
-router.post('/demo-login',
+router.get('/demo-login',
   asyncHandler(async (req, res) => {
     console.log('you are in the POST demo-login route...');
 
+    const username = 'randomDemoName';
+    const email = 'username@username.com';
+    const password = 'MCuW7LqDQLVUw9e4';
+
+    const user = db.User.build({
+      username,
+      email,
+    });
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    user.hashedPassword = hashedPassword;
+    await user.save();
+    loginUser(req, res, user);
+
+    req.session.save((err) => {
+      if (err) return next(err);
+      return res.redirect('/');
+    });
 
     // possibilities: 
     // 1. demo login not requested yet

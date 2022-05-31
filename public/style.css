@@ -581,7 +581,8 @@ p + p {
   margin-top: var(--space-size-11);
 }
 
-.login-form-buttons>button {
+.login-form-buttons>button,
+.login-form-buttons>a {
   font-family: var(--default-sans-serif);
   font-size: var(--font-size-12);
   color: var(--grey-1);
