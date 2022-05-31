@@ -139,6 +139,7 @@ async function generateContent(user) {
     );
   }
 
+  // add follows to db
   await db.Follow.bulkCreate(follows);
 }
 
