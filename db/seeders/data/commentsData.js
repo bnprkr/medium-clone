@@ -38,4 +38,5 @@ for (let i = 0; i < numComments; i++) {
   );
 }
 
-module.exports = { comments, numComments };
+module.exports = { comments, numComments,
+  minSentencePerComment, maxSentencePerComment, maxWordsTitle };

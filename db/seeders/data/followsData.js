@@ -6,7 +6,7 @@ for (let i = 1; i <= numUsers; i++) {
   userIds.push(i);
 }
 
-const minFollowing = 5;
+const minFollowing = 3;
 const maxFollowing = 8;
 
 const follows = [];
