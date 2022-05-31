@@ -35,6 +35,7 @@ module.exports = {
     await queryInterface.bulkDelete('StoryLikes', null, {});
     await queryInterface.bulkDelete('Comments', null, {});
     await queryInterface.bulkDelete('Stories', null, {});
+    await queryInterface.bulkDelete('Follows', null, {});
     return queryInterface.bulkDelete('Users', null, {});
   }
 };
