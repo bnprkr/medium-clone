@@ -8,7 +8,7 @@ const { userValidators, loginValidators } = require('./validators')
 const { loginUser, logoutUser } = require('../auth');
 const { render } = require('../app');
 const { redirect } = require('express/lib/response');
-const { createUser } = require('../bin/fakeData');
+const { createUser, createStories } = require('../bin/fakeData');
 
 const router = express.Router();
 
@@ -123,14 +123,24 @@ router.get('/demo-login',
       hashedPassword
     } = await createUser();
 
-    const user = db.User.build({
+    // await createStories
+
+    // const user = db.User.build({
+    //   username,
+    //   email,
+    //   hashedPassword,
+    //   demo: true,
+    // });
+
+    const user = await db.User.create({
       username,
       email,
       hashedPassword,
       demo: true,
     });
 
-    await user.save();
+    await createStories(user);
+
     loginUser(req, res, user);
 
     req.session.save((err) => {

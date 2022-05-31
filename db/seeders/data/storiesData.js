@@ -33,4 +33,5 @@ for (let i = 0; i < numStories; i++) {
   );
 }
 
-module.exports = { stories, numStories };
+module.exports = { stories, numStories, 
+  lorem, numStories, maxWordsTitle, minParasPerStory, maxParasPerStory };
