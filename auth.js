@@ -4,9 +4,23 @@ const loginUser = (req, res, user) => {
   req.session.auth = {
     userId: user.id
   };
+
+  // if demo user add demo flag to auth object
+  if (user.demo === true) {
+    req.session.auth.demo = true;
+  }
 };  
 
-const logoutUser = (req, res) => {
+const logoutUser = async (req, res) => {
+  // if account is a demo account
+  // delete account on logout
+  // new demo login will create new account
+  if (req.session.auth.demo === true) {
+    const { userId } = req.session.auth;
+    const user = await db.User.findByPk(userId);
+    await user.destroy();
+  }
+
   delete req.session.auth;
 };
 

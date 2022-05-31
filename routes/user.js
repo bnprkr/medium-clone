@@ -7,6 +7,7 @@ const { csrfProtection, asyncHandler } = require('./utils');
 const { userValidators, loginValidators } = require('./validators')
 const { loginUser, logoutUser } = require('../auth');
 const { render } = require('../app');
+const { redirect } = require('express/lib/response');
 
 const router = express.Router();
 
@@ -109,8 +110,12 @@ router.post('/login', csrfProtection, loginValidators,
 
 router.get('/demo-login',
   asyncHandler(async (req, res) => {
-    console.log('you are in the POST demo-login route...');
-
+    // // prevent additional account creation 
+    // // if already logged in..
+    // if (req.session.auth) {
+    //   return res.redirect('/');
+    // }
+ 
     const username = 'randomDemoName';
     const email = 'username@username.com';
     const password = 'MCuW7LqDQLVUw9e4';
@@ -118,54 +123,33 @@ router.get('/demo-login',
     const user = db.User.build({
       username,
       email,
+      demo: true,
     });
 
     const hashedPassword = await bcrypt.hash(password, 10);
     user.hashedPassword = hashedPassword;
-    await user.save();
-    loginUser(req, res, user);
 
-    req.session.save((err) => {
-      if (err) return next(err);
-      return res.redirect('/');
-    });
+    try {
+      await user.save();
+      loginUser(req, res, user);
 
-    // possibilities: 
-    // 1. demo login not requested yet
-    // 2. demo login requested but not created/logged in (possibly failed)
-    // 3. demo login already requested and created and logged in
+      req.session.save((err) => {
+        if (err) return next(err);
+        return res.redirect('/');
+      });
 
-    // demo login not requested yet (undefined) or failed (false)
-    // if (!res.locals.demo) {
-    //   res.locals.demo = true;
-
-    //   const userId = await requestDemoLogin();
-
-    //   console.log(userId);
-
-    //   if (userId) {
-    //     loginUser(req, res, { userId });
-    //     req.session.save((err) => {
-    //       if (err) return next(err);
-    //       return res.redirect('/');
-    //     });
-    //   } else {
-    //     res.locals.demo = false;
-    //   }
-    // } else {
-    //   // if already logged in, attempt redirect to /
-    //   // else do nothing
-    //   if (req.session.auth) {
-    //     return res.redirect('/');
-    //   }
-    // }
+    } catch (e) {
+      console.log(e);
+    }
   })
 );
 
-router.post('/logout', (req, res) => {
-  logoutUser(req, res);
-  return res.redirect('/login');
-});
+router.post('/logout', 
+  asyncHandler(async (req, res) => {
+    await logoutUser(req, res);
+    return res.redirect('/login');
+  })
+);
 
 
 
