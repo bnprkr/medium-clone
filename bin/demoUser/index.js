@@ -1,4 +1,4 @@
-const { createUser } = require('./user.js');
+const { createUser, deleteUser } = require('./user.js');
 const { generateContent } = require('./content.js');
 
 async function generateDemoAccount() {
@@ -9,4 +9,5 @@ async function generateDemoAccount() {
 
 module.exports = {
   generateDemoAccount,
+  deleteUser
 }

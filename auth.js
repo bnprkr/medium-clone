@@ -1,4 +1,5 @@
 const db = require("./db/models");
+const { deleteUser } = require('./bin/demoUser');
 
 const loginUser = (req, res, user) => {
   req.session.auth = {
@@ -15,11 +16,10 @@ const logoutUser = async (req, res) => {
   // if account is a demo account
   // delete account on logout
   // new demo login will create new account
-  // if (req.session.auth.demo === true) {
-  //   const { userId } = req.session.auth;
-  //   const user = await db.User.findByPk(userId);
-  //   await user.destroy();
-  // }
+  if (req.session.auth.demo === true) {
+    const { userId } = req.session.auth;
+    await deleteUser(userId);
+  }
 
   delete req.session.auth;
 };
