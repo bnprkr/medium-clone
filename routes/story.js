@@ -8,6 +8,13 @@ const { userValidators, loginValidators } = require('./validators')
 const { loginUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
 const { Op } = require('sequelize');
+const { numUsers } = require('../db/seeders/data/usersData');
+
+// array of ids for seeded users
+const users = [];
+for (let i = 1; i <= numUsers; i++) {
+  users.push(i);
+}
 
 const router = express.Router();
 
@@ -46,14 +53,21 @@ router.get('/@:username/stories',
 router.get('/@:username/stories/:storyId',
   asyncHandler(async (req, res) => {
     const storyId = parseInt(req.params.storyId);
-
     const currentUserId = res.locals.user.id;
-
-    console.log('type of currentUserID', typeof currentUserId);
 
     const story = await Story.findOne({ 
       where: { id: storyId },
-      include: [User, StoryLike, { model: Comment, include: User }],
+      include: [
+        User, 
+        StoryLike, 
+        { model: Comment, 
+          where: {
+            // exclude comments from demo/registered users
+            userId: users.concat(currentUserId)
+          },
+          include: User 
+        }
+      ],
     });
 
     const comments = story.Comments.map(comment => {

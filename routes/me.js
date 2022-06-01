@@ -13,9 +13,16 @@ const { userValidators, loginValidators } = require('./validators')
 const { loginUser, restoreUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
 const { Op } = require('sequelize');
+const { numUsers } = require('../db/seeders/data/usersData');
 
 const charsInPreview = 180;
 const numStorysFeed = 10;
+
+// array of ids for seeded users
+const users = [];
+for (let i = 1; i <= numUsers; i++) {
+  users.push(i);
+}
 
 const router = express.Router();
 
@@ -45,7 +52,17 @@ router.get('/',
       where: { userId: { [Op.in]: followingIds } },
       order: sequelize.random(),
       limit: numStorysFeed,
-      include: [User, StoryLike, Comment]
+      include: [
+        User, 
+        StoryLike, 
+        {
+          model: Comment,
+          // exclude comments from demo/registered users
+          where: {
+            userId: users.concat(userId)
+          }
+        }
+      ]
     });
 
     const storiesData = stories.map(story => {
@@ -198,7 +215,13 @@ router.get('/me/follow',
     const followingIds = following.map(follow => follow.followingUserId);
 
     const notFollowing = await User.findAll({
-      where: { id: { [Op.notIn]: [...followingIds, userId] } }
+      where: { 
+        id: {
+           [Op.notIn]: [...followingIds, userId],
+           // don't allow to follow demo/registered users
+           [Op.in]: users
+        } 
+      }
     });
 
     const notFollowingData = notFollowing.map(user => {
