@@ -164,18 +164,24 @@ router.get('/me/stories/:storyId',
 
 router.get('/me/stories/:storyId/edit',
   asyncHandler(async (req, res) => {
-    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
+    const userId = res.locals.user.id;
 
-    const story = await Story.findOne({ where: { id: req.params.storyId } });
+    // will only find story if exists and belongs to current user
+    const story = await Story.findOne({ where: { id: req.params.storyId, userId } });
 
-    const storyData = {
-      title: story.title,
-      text: story.storyText,
+    if (story) {
+      const storyData = {
+        title: story.title,
+        text: story.storyText,
+      }
+      
+      return res.render('story-edit', {
+        story: storyData
+      });
+    } else {
+      return res.status(403).end();
     }
-    
-    return res.render('story-edit', {
-      story: storyData
-    })
+
   })
 );
 
