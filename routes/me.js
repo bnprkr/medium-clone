@@ -123,6 +123,8 @@ router.get('/me/stories/:storyId',
 
     const storyId = parseInt(req.params.storyId);
 
+    const username = res.locals.user.username;
+
     const story = await Story.findOne({ 
       where: { id: storyId },
       include: [User, StoryLike, { model: Comment, include: User }],
@@ -151,6 +153,7 @@ router.get('/me/stories/:storyId',
     };
 
     return res.render('story', {
+      username,
       story: storyData
     });
   })

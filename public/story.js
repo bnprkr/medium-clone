@@ -14,33 +14,47 @@ addCommentButton.addEventListener('click', async (event) => {
 
   if (textRaw) {
     // add comment to db
-    // create api route for this..
+    const commentData = {
+      author: username,
+      text: textRaw,
+    }
 
-    // create comment container
-    const commentDiv = document.createElement("div");
-    commentDiv.classList.add("comment-box");
-    // create author container, add author, add to comment container
-    const authorDiv = document.createElement("div");
-    authorDiv.classList.add("comment-author");
-    const author = document.createTextNode(`${username}`);
-    authorDiv.appendChild(author);
-    commentDiv.appendChild(authorDiv);
-    // create comment text container, add each paragraph
-    const commentTextDiv = document.createElement("div");
-    commentTextDiv.classList.add("comment-text");
-
-    textRaw.split('\n').forEach(para => {
-      const element = document.createElement("p");
-      const text = document.createTextNode(`${para}`);
-      element.appendChild(text);
-      commentTextDiv.appendChild(element);
+    const response = await fetch(`http://localhost:8080/api/stories/${storyId}/comment`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(commentData)
     })
+    .catch(error => console.error(error));
 
-    commentDiv.appendChild(commentTextDiv);
+    if (response.ok) {
+      // create comment container
+      const commentDiv = document.createElement("div");
+      commentDiv.classList.add("comment-box");
+      // create author container, add author, add to comment container
+      const authorDiv = document.createElement("div");
+      authorDiv.classList.add("comment-author");
+      const author = document.createTextNode(`${username}`);
+      authorDiv.appendChild(author);
+      commentDiv.appendChild(authorDiv);
+      // create comment text container, add each paragraph
+      const commentTextDiv = document.createElement("div");
+      commentTextDiv.classList.add("comment-text");
 
-    // prepend new comment to list
-    const commentsList = document.querySelector(".comments>.comments-list");
-    commentsList.prepend(commentDiv);
+      textRaw.split('\n').forEach(para => {
+        const element = document.createElement("p");
+        const text = document.createTextNode(`${para}`);
+        element.appendChild(text);
+        commentTextDiv.appendChild(element);
+      })
+
+      commentDiv.appendChild(commentTextDiv);
+
+      // prepend new comment to list
+      const commentsList = document.querySelector(".comments>.comments-list");
+      commentsList.prepend(commentDiv);
+    }
   }
 });
 

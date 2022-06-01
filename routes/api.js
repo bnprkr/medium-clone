@@ -6,6 +6,8 @@
 // - POST /api/users/:userId/follow/:userId
 // - DELETE /api/users/:userId/follow/:userId
 
+// - POST /api/stories/:storyId/comment
+
 
 const express = require('express');
 const { validationResult } = require('express-validator');
@@ -21,6 +23,21 @@ const { Op } = require('sequelize');
 const router = express.Router();
 
 router.use(requireAuth);
+router.use(express.json());
+
+// add comment to db
+router.post('/stories/:storyId/comment',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+
+    await db.Comment.create({
+      storyId: req.params.storyId,
+      userId,
+      title: 'none',
+      commentText: req.body.text,
+    }).then(() => res.status(201).end());
+  })
+)
 
 // get like status for story
 router.get('/stories/:storyId/like',
