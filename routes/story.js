@@ -69,6 +69,9 @@ router.get('/@:username/stories/:storyId',
           include: User 
         }
       ],
+      order: [
+        [Comment, 'createdAt', 'DESC']
+      ]
     });
 
     const comments = story.Comments.map(comment => {

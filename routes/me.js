@@ -128,6 +128,9 @@ router.get('/me/stories/:storyId',
     const story = await Story.findOne({ 
       where: { id: storyId },
       include: [User, StoryLike, { model: Comment, include: User }],
+      order: [
+        [Comment, 'createdAt', 'DESC']
+      ]
     });
 
     const comments = story.Comments.map(comment => {
