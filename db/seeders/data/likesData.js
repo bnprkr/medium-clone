@@ -10,7 +10,7 @@ for (let i = 0; i < numStoryLikes; i++) {
   const storyIndex = Math.floor(Math.random() * numStories);
   storyLikes.push(
     {
-      userId: stories[storyIndex].userId,
+      userId: 2,
       storyId: storyIndex + 1,
       createdAt: new Date(),
       updatedAt: new Date()
