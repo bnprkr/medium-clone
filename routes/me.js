@@ -192,13 +192,17 @@ router.post('/me/stories/:storyId/edit',
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
     const storyId = req.params.storyId;
-
+    
     // will only find story if exists and belongs to current user
     const story = await Story.findOne({ where: { id: storyId, userId } });
 
     if (story) {
       // get submitted story data from body
-      const { title, storyText } = req.body;
+      const { title } = req.body;
+      let { storyText } = req.body;
+
+      const regex = /(\r\n){1,}/g;
+      storyText = storyText.replace(regex, '\n');
 
       // update story with edited info
       await story.update({ title, storyText })
