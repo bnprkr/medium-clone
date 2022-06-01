@@ -40,15 +40,11 @@ router.get('/@:username/stories',
     });
 
     return res.send(storiesData);
-
   })
 );
 
 router.get('/@:username/stories/:storyId',
   asyncHandler(async (req, res) => {
-    
-    // TODO add handling to check if :storyId belongs to :username and forward to /me/stories/:storyId if does
-
     const storyId = parseInt(req.params.storyId);
 
     const currentUserId = res.locals.user.id;
