@@ -53,6 +53,7 @@ router.get('/@:username/stories',
 router.get('/@:username/stories/:storyId',
   asyncHandler(async (req, res) => {
     const storyId = parseInt(req.params.storyId);
+    const username = res.locals.user.username;
     const currentUserId = res.locals.user.id;
 
     const story = await Story.findOne({ 
@@ -93,6 +94,7 @@ router.get('/@:username/stories/:storyId',
     };
 
     return res.render('story', {
+      username,
       story: storyData
     });
   })

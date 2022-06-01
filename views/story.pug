@@ -35,7 +35,7 @@ block content
             .comment-text 
               textarea(name="commentText" cols="45" rows="5" placeholder="Comment..")
             .comment-submit 
-              input(type="submit", value="Add comment")
+              input(type="button", value="Add comment")
         .comments-list
           each comment in story.comments 
             .comment-box 
@@ -47,6 +47,8 @@ block content
                 each para in comment.text.split('\n')
                   p #{para}
 
+  script.
+    username = "#{username}"
   script(src="/story.js")
 
   
