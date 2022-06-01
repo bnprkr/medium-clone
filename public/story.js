@@ -10,7 +10,8 @@ const addCommentButton = document.querySelector(".comment-submit>input");
 
 addCommentButton.addEventListener('click', async (event) => {
   // get comment text
-  const textRaw = document.querySelector(".comment-form .comment-text>textarea").value;
+  const commentBox = document.querySelector(".comment-form .comment-text>textarea");
+  const textRaw = commentBox.value;
 
   if (textRaw) {
     // add comment to db
@@ -55,6 +56,9 @@ addCommentButton.addEventListener('click', async (event) => {
       const commentsList = document.querySelector(".comments>.comments-list");
       commentsList.prepend(commentDiv);
     }
+
+    // clear comment textarea
+    commentBox.value = '';
   }
 });
 
