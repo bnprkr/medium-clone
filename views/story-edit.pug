@@ -8,12 +8,12 @@ block content
       .edit-story
         .edit-page-title Edit Story
         .edit-story-form
-          form(action="")
+          form(action=`/me/stories/${storyId}/edit`, method="post")
             .edit-title
-              textarea(name="commentTitle" spellcheck="false" cols="75" rows="1")
+              textarea(name="title" spellcheck="false" cols="75" rows="1")
                 | #{story.title}
             .edit-text
-              textarea(name="commentText" spellcheck="false" cols="75" rows="30")
+              textarea(name="storyText" spellcheck="false" cols="75" rows="30")
                 each para, index in story.text.split('\n')
                   if index > 0
                     | &#13;&#10;&#13;&#10;

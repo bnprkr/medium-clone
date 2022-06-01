@@ -14,6 +14,7 @@ const { loginUser, restoreUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
 const { Op } = require('sequelize');
 const { numUsers } = require('../db/seeders/data/usersData');
+const { redirect } = require('express/lib/response');
 
 const charsInPreview = 180;
 const numStorysFeed = 10;
@@ -165,9 +166,10 @@ router.get('/me/stories/:storyId',
 router.get('/me/stories/:storyId/edit',
   asyncHandler(async (req, res) => {
     const userId = res.locals.user.id;
+    const storyId = req.params.storyId;
 
     // will only find story if exists and belongs to current user
-    const story = await Story.findOne({ where: { id: req.params.storyId, userId } });
+    const story = await Story.findOne({ where: { id: storyId, userId } });
 
     if (story) {
       const storyData = {
@@ -176,12 +178,37 @@ router.get('/me/stories/:storyId/edit',
       }
       
       return res.render('story-edit', {
+        storyId,
         story: storyData
       });
     } else {
       return res.status(403).end();
     }
 
+  })
+);
+
+router.post('/me/stories/:storyId/edit',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const storyId = req.params.storyId;
+
+    // will only find story if exists and belongs to current user
+    const story = await Story.findOne({ where: { id: storyId, userId } });
+
+    if (story) {
+      // get submitted story data from body
+      const { title, storyText } = req.body;
+
+      // update story with edited info
+      await story.update({ title, storyText })
+      .then(() => {
+        return res.redirect(`/me/stories/${storyId}`);
+      });
+    } else {
+      // shouldn't be possible to reach here
+      return res.status(403).end();
+    }
   })
 );
 
