@@ -13,17 +13,6 @@ addCommentButton.addEventListener('click', async (event) => {
   const textRaw = document.querySelector(".comment-form .comment-text>textarea").value;
 
   if (textRaw) {
-    const textParas = textRaw.split('\n');
-    let textFinal = '';
-
-    textParas.forEach(para => {
-      if (para) {
-        textFinal += `
-          <p>${para}</p>
-        `;
-      }
-    });
-
     // add comment to db
     // create api route for this..
 
