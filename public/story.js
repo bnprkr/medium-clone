@@ -58,7 +58,6 @@ addCommentButton.addEventListener('click', async (event) => {
   }
 });
 
-
 const likeButton = document.querySelector("i.like-button");
 
 likeButton.addEventListener("click", async (event) => {
