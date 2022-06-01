@@ -1,6 +1,3 @@
-const faker = require('faker');
-const bcrypt = require('bcryptjs');
-
 const db = require('../../db/models');
 const { numUsers } = require('../../db/seeders/data/usersData');
 const { 
@@ -15,31 +12,20 @@ const {
   maxWordsTitle: maxWordsCommentTitle,
 } = require('../../db/seeders/data/commentsData');
 
-// use this for now, may wish to calculate based on current avg per user..
-const numStories = 15;
-
-// createUser
-async function createUser() {
-  // returns a randomly generated user with email/username/hashedPassword
-  const password = faker.internet.password();
-
-  const hashedPassword = await new Promise((resolve, reject) => {
-    bcrypt.hash(password, 10, function(err, hash) {
-      if (err) reject(err);
-      resolve(hash);
-    });
-  })
-
-  return {
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
-    hashedPassword,
-  }
-}
-
 async function generateContent(user) {
+  // get userId
   const userId = user.id;
 
+  // create stories and get story ids
+  const storyIds = await createStories(userId);
+
+  // generate and create likes, comments, follows on db
+  await createStoryLikes(storyIds);
+  await createComments(storyIds);
+  await createFollows(userId);
+}
+
+async function createStories(userId) {
   // CREATE STORIES
   const stories = [];
 
@@ -60,9 +46,7 @@ async function generateContent(user) {
   // add stories to db
   await db.Story.bulkCreate(stories);
 
-  // CREATE STORY LIKES AND COMMENTS
-
-  // get storyIds for all stories by this user...
+  // get and return story ids
   const storyIds = await db.Story.findAll({
     raw: true,
     attributes: ['id'],
@@ -73,8 +57,11 @@ async function generateContent(user) {
     return ids.map(obj => obj.id);
   });
 
+  return storyIds;
+}
+
+async function createStoryLikes(storyIds) {
   const storyLikes = [];
-  const comments = [];
 
   // loop over storyIds and add likes for each one
   for (const id of storyIds) {
@@ -89,7 +76,17 @@ async function generateContent(user) {
         }
       );
     }
+  }
 
+  // add story likes to db
+  await db.StoryLike.bulkCreate(storyLikes);
+}
+
+async function createComments(storyIds) {
+  const comments = [];
+
+  // loop over storyIds and add likes for each one
+  for (const id of storyIds) {
     // 2 to 8 comments per story
     const numStoryComments = 2 + Math.floor(Math.random() * (9 - 2));
 
@@ -107,18 +104,17 @@ async function generateContent(user) {
     }
   }
 
-  // add story likes to db
-  await db.StoryLike.bulkCreate(storyLikes);
+  // add comments to db
   await db.Comment.bulkCreate(comments);
+}
 
-  // CREATE FOLLOWS
-
+async function createFollows(userId) {
   const follows = [];
 
   // create array of the seeded users
   // will select users to follow from these
   const users = [];
-  for (let i = 1; i <= 10; i++) {
+  for (let i = 1; i <= numUsers; i++) {
     users.push(i);
   }
 
@@ -144,6 +140,5 @@ async function generateContent(user) {
 }
 
 module.exports = {
-  createUser,
   generateContent,
 };

@@ -8,7 +8,7 @@ const { userValidators, loginValidators } = require('./validators')
 const { loginUser, logoutUser } = require('../auth');
 const { render } = require('../app');
 const { redirect } = require('express/lib/response');
-const { createUser, generateContent } = require('../bin/fakeData');
+const { generateDemoAccount } = require('../bin/demoUser');
 
 const router = express.Router();
 
@@ -117,29 +117,8 @@ router.get('/demo-login',
       return res.redirect('/');
     }
 
-    const { 
-      username, 
-      email,
-      hashedPassword
-    } = await createUser();
-
-    // await createStories
-
-    // const user = db.User.build({
-    //   username,
-    //   email,
-    //   hashedPassword,
-    //   demo: true,
-    // });
-
-    const user = await db.User.create({
-      username,
-      email,
-      hashedPassword,
-      demo: true,
-    });
-
-    await generateContent(user);
+    // generate demo user and content
+    const user = await generateDemoAccount();
 
     loginUser(req, res, user);
 
@@ -147,7 +126,6 @@ router.get('/demo-login',
       if (err) return next(err);
       return res.redirect('/');
     });
-
   })
 );
 
@@ -157,7 +135,5 @@ router.post('/logout',
     return res.redirect('/login');
   })
 );
-
-
 
 module.exports = router;
