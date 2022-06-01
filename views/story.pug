@@ -36,15 +36,16 @@ block content
               textarea(name="commentText" cols="45" rows="5" placeholder="Comment..")
             .comment-submit 
               input(type="submit", value="Add comment")
-        each comment in story.comments 
-          .comment-box 
-            //- .comment-title 
-            //-   h3 #{comment.title}        
-            .comment-author 
-              | #{comment.author}
-            .comment-text 
-              each para in comment.text.split('\n')
-                p #{para}
+        .comments-list
+          each comment in story.comments 
+            .comment-box 
+              //- .comment-title 
+              //-   h3 #{comment.title}        
+              .comment-author 
+                | #{comment.author}
+              .comment-text 
+                each para in comment.text.split('\n')
+                  p #{para}
 
   script(src="/story.js")
 
