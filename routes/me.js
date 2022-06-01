@@ -181,15 +181,21 @@ router.get('/me/stories/:storyId/edit',
 
 router.get('/me/stories/:storyId/delete',
   asyncHandler(async (req, res) => {
-    // TODO make sure currently logged in user owns story with id of :storyId and return error if not (unauthorized)
+    const userId = res.locals.user.id;
 
-    const story = await Story.findOne({ where: { id: req.params.storyId } });
+    // will only find story if exists and belongs to current user
+    const story = await Story.findOne({ where: { id: req.params.storyId, userId } });
 
     if (story) {
+      // delete likes, comments and story
+      const storyId = req.params.storyId;
+      await StoryLike.destroy({ where: { storyId } });
+      await Comment.destroy({ where: { storyId } });
       await story.destroy();
-      return res.status(204).end();
+      return res.status(204).redirect('/me/stories');
     } else {
-      // TODO add error handling for delete story that does not exist...
+      // either story does not exist or logged in user does not own this story
+      return res.status(403).end();
     }
 
   })
