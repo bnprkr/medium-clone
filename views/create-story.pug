@@ -10,8 +10,8 @@ block content
         .create-story-form
           form(action=`/create-story`, method="post")
             .create-title
-              textarea(name="title" spellcheck="false" cols="75" rows="1")
+              textarea(name="title" spellcheck="false" placeholder="Title" cols="75" rows="1")
             .create-text
-              textarea(name="storyText" spellcheck="false" cols="75" rows="30")
+              textarea(name="storyText" spellcheck="false" placeholder="Tell your story..." cols="75" rows="20")
             .create-submit 
               input(type="submit", value="Create Story")
