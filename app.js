@@ -39,7 +39,8 @@ app.use((err, req, res, next) => {
   if (process.env.NODE_ENV === 'production') {
     // TODO Log the error to the database.
   } else {
-    console.error(err);
+    console.error(err.message);
+    console.error(err.stack);
   }
   next(err);
 });
