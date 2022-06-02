@@ -47,8 +47,7 @@ async function deleteUser(userId) {
   await db.Comment.destroy({ where: { storyId: { [Op.in]: storyIds } } });
   await db.Story.destroy({ where: { id: { [Op.in]: storyIds } } });
   await db.Follow.destroy({ where: { userId } });
-  await user.destroy();
-  // await db.User.destroy({ where: { id: userId } });
+  await db.User.destroy({ where: { id: userId } });
 }
 
 module.exports = {

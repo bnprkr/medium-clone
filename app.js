@@ -34,15 +34,4 @@ app.use(userRoutes);
 app.use(storyRoutes);
 app.use('/api', apiRoutes);
 
-// Error handler to log errors.
-app.use((err, req, res, next) => {
-  if (process.env.NODE_ENV === 'production') {
-    // TODO Log the error to the database.
-  } else {
-    console.error(err.message);
-    console.error(err.stack);
-  }
-  next(err);
-});
-
 module.exports = app;
