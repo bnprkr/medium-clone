@@ -9,6 +9,7 @@ const { loginUser, requireAuth } = require('../auth');
 const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
 const { Op } = require('sequelize');
 const { numUsers } = require('../db/seeders/data/usersData');
+const { url } = require('../config');
 
 // array of ids for seeded users
 const users = [];
@@ -98,7 +99,8 @@ router.get('/@:username/stories/:storyId',
 
     return res.render('story', {
       username,
-      story: storyData
+      story: storyData,
+      url
     });
   })
 );

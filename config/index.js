@@ -1,5 +1,13 @@
+const environment = process.env.NODE_ENV || 'development';
+
+let url = 'http://localhost:8080';
+if (environment === 'production') {
+  url = 'https://lorem-ipsum-medium.herokuapp.com/'
+}
+
 module.exports = {
-  environment: process.env.NODE_ENV || 'development',
+  environment,
+  url,
   port: process.env.PORT || 8080,
   db: {
     username: process.env.PGUSER,

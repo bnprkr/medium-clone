@@ -20,7 +20,7 @@ addCommentButton.addEventListener('click', async (event) => {
       text: textRaw,
     }
 
-    const response = await fetch(`http://localhost:8080/api/stories/${storyId}/comment`, {
+    const response = await fetch(`${url}/api/stories/${storyId}/comment`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ likeButton.addEventListener("click", async (event) => {
   const likes = document.querySelector(".story-likes > span");
 
   try {
-    const res = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
+    const res = await fetch(`${url}/api/stories/${storyId}/like`, {
       method: 'GET',
     });
 
@@ -79,7 +79,7 @@ likeButton.addEventListener("click", async (event) => {
 
     if (liked) {
       // if liked delete like
-      const deleteLike = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
+      const deleteLike = await fetch(`${url}/api/stories/${storyId}/like`, {
         method: 'DELETE',
       });
 
@@ -91,7 +91,7 @@ likeButton.addEventListener("click", async (event) => {
       }
 
     } else {
-      const addLike = await fetch(`http://localhost:8080/api/stories/${storyId}/like`, {
+      const addLike = await fetch(`${url}/api/stories/${storyId}/like`, {
         method: 'POST',
       });
 

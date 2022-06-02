@@ -4,6 +4,7 @@ include utils.pug
 
 block content 
   main 
+    h1 #{url}
     article 
       .story-container
         .story-box-full
@@ -50,6 +51,7 @@ block content
   script.
     const username = "#{username}"
     const storyId = "#{story.storyId}"
+    const url = "#{url}"
   script(src="/story.js")
 
   
