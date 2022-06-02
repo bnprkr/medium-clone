@@ -2,7 +2,7 @@ const environment = process.env.NODE_ENV || 'development';
 
 let url = 'http://localhost:8080';
 if (environment === 'production') {
-  url = 'https://lorem-ipsum-medium.herokuapp.com/'
+  url = 'https://lorem-ipsum-medium.herokuapp.com'
 }
 
 module.exports = {
