@@ -165,8 +165,8 @@ a.story-box {
   justify-content: space-between;
   align-items: center;
   padding: var(--space-size-13);
-  margin-top: var(--space-size-13);
-  margin-bottom: var(--space-size-12);
+  margin-top: var(--space-size-12);
+  margin-bottom: var(--space-size-13);
 }
 
 .my-stories>.header>h1 {
@@ -282,11 +282,13 @@ p + p {
   font-size: var(--font-size-8);
   width: 35em;
   padding-bottom: var(--space-size-12);
+  line-height: var(--space-size-12);
 }
 
-.story-box-full>.story-title {
-  font-size: var(--font-size-8);
-  padding-bottom: var(--space-size-13);
+.story-box-full>.story-title>h1 {
+  font-size: var(--font-size-7);
+  margin-top: var(--space-size-11);
+  margin-bottom: var(--space-size-12);
 }
 
 .edit-delete>a:nth-of-type(2) {
@@ -294,7 +296,8 @@ p + p {
 }
 
 .story-box-full>.story-box-bottom-bar {
-  padding: 0 var(--space-size-16);
+  padding: var(--space-size-15) var(--space-size-16);
+  margin-bottom: var(--space-size-14);
   font-size: var(--font-size-10);
   color: var(--grey-2);
 }
@@ -317,14 +320,18 @@ p + p {
   .story-box-full>.story-text {
     width: 100%;
     font-size: var(--font-size-9);
+    padding-bottom: var(--space-size-13);
   }
   
-  .story-box-full>.story-title {
+  .story-box-full>.story-title>h1 {
+    margin-top: var(--space-size-12);
+    margin-bottom: var(--space-size-13);
     font-size: var(--font-size-9);
   }
 
   .story-box-full>.story-box-bottom-bar {
     font-size: var(--font-size-11);
+    padding: var(--space-size-16) var(--space-size-16); 
   }
 }
 
@@ -423,12 +430,16 @@ p + p {
   }
 
   .comment-text>textarea::placeholder {
-    font-size: var(--font-size-8);
+    font-size: var(--font-size-9);
 
   }
 
   .comment-box,
   .comment-text>textarea {
+    font-size: var(--font-size-11);
+  }
+
+  .comment-submit>input {
     font-size: var(--font-size-11);
   }
 }
