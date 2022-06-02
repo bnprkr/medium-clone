@@ -784,6 +784,7 @@ p + p {
   padding: var(--space-size-15);  
   border: 1px solid var(--grey-4);
   border-radius: 5px;
+  text-align: center;
 }
 
 .login-form-buttons>.demo-login {
@@ -823,6 +824,7 @@ p + p {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /* text-align: center; */
     gap: var(--space-size-15);
     margin-top: var(--space-size-14);
   }
