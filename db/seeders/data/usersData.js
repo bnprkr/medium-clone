@@ -1,7 +1,6 @@
 const faker = require('faker');
 const bcrypt = require('bcryptjs');
 
-require('dotenv').config();
 const { username, email, password } = require('../../../config').user;
 
 // parameters
