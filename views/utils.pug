@@ -17,7 +17,7 @@ mixin storyPreviews(stories, source, title)
       .header
         h1 #{title}
         if source === 'my-stories'
-          a(href='/create').create-story Create Story
+          a(href='/create-story').create-story Create Story
       each story in stories 
         article 
           if source === 'my-stories'
