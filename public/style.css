@@ -550,8 +550,8 @@ p + p {
   width: calc(var(--space-size-2) - 2 * var(--space-size-14));
   height: auto;
   border: none;
-  font-family: var(--default-serif);
-  font-size: var(--font-size-4);
+  font-family: var(--default-sans-serif);
+  font-size: var(--font-size-7);
   font-weight: 500;
   margin-bottom: var(--space-size-16);
 }
@@ -560,8 +560,9 @@ p + p {
   width: calc(var(--space-size-2) - 2 * var(--space-size-14));
   border: none;
   font-family: var(--default-serif);
-  font-size: var(--font-size-7);
+  font-size: var(--font-size-8);
   margin-bottom: var(--space-size-13);
+  line-height: var(--space-size-12);
 }
 
 .edit-submit {
@@ -593,7 +594,6 @@ p + p {
   }
 
   .edit-title>textarea {
-    font-size: var(--font-size-8);
     font-weight: 600;
   }
 
@@ -694,13 +694,17 @@ p + p {
   .create-text>textarea {
     width: 100%;
     font-size: var(--font-size-9);
-    padding: var(--space-size-16) 0;
+    padding: var(--space-size-16);
     color: var(--grey-2);
   }
 
+  .create-story-form { 
+    padding: var(--space-size-15);
+  }
+
   .create-title>textarea {
-    font-size: var(--font-size-8);
-    font-weight: 600;
+    font-size: var(--font-size-6);
+    /* font-weight: 600; */
   }
 
   .create-text>textarea::placeholder {
