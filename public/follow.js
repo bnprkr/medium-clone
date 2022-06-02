@@ -5,7 +5,7 @@ followButtons.forEach((button) => {
     const followId = event.target.parentNode.parentNode.id;
   
     try {
-      const res = await fetch(`http://localhost:8080/api/users/${followId}/follow`, {
+      const res = await fetch(`${url}/api/users/${followId}/follow`, {
         method: 'GET',
       });
   
@@ -13,7 +13,7 @@ followButtons.forEach((button) => {
   
       if (following) {
         // if following delete follow
-        const deleteFollow = await fetch(`http://localhost:8080/api/users/${followId}/follow`, {
+        const deleteFollow = await fetch(`${url}/api/users/${followId}/follow`, {
           method: 'DELETE'
         });
   
@@ -33,7 +33,7 @@ followButtons.forEach((button) => {
         }
       } else {
         // if not following add follow
-        const addFollow = await fetch(`http://localhost:8080/api/users/${followId}/follow`, {
+        const addFollow = await fetch(`${url}/api/users/${followId}/follow`, {
           method: 'POST'
         });
   

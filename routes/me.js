@@ -15,6 +15,7 @@ const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = requ
 const { Op } = require('sequelize');
 const { numUsers } = require('../db/seeders/data/usersData');
 const { redirect } = require('express/lib/response');
+const { url } = require('../config');
 
 const charsInPreview = 180;
 const numStorysFeed = 10;
@@ -306,7 +307,12 @@ router.get('/me/follow',
       }
     });
 
-    return res.render('follow', { following: followingData, notFollowing: notFollowingData });
+    return res.render('follow', 
+    { 
+      following: followingData, 
+      notFollowing: notFollowingData,
+      url
+    });
   })
 );
 
