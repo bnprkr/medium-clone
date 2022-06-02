@@ -1,0 +1,17 @@
+extends layout.pug 
+
+include utils.pug 
+
+block content 
+  main
+    .create-story-container
+      .create-story
+        .create-page-title Create Story
+        .create-story-form
+          form(action=`/create-story`, method="post")
+            .create-title
+              textarea(name="title" spellcheck="false" cols="75" rows="1")
+            .create-text
+              textarea(name="storyText" spellcheck="false" cols="75" rows="30")
+            .create-submit 
+              input(type="submit", value="Create Story")

@@ -116,6 +116,16 @@ router.get('/me/stories',
   })
 );
 
+router.get('/create-story',
+  asyncHandler(async (req, res) => {
+    return res.render('create-story', {
+
+
+      
+    });
+  })
+)
+
 router.get('/me/stories/:storyId',
   asyncHandler(async (req, res) => {
     
