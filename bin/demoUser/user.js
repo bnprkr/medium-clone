@@ -51,12 +51,12 @@ async function deleteUser(userId) {
   });
 
   // delete likes from all userIds stories OR by userId on any stories
-  await db.StoryLike.destroy({ where: { [Op.or]: [{ storyId: { [Op.in]: storyIds }}, userId] } });
+  await db.StoryLike.destroy({ where: { [Op.or]: [{ storyId: storyIds }, { userId }] } });
   // delete comments from all userIds stories OR by userId on any stories
-  await db.Comment.destroy({ where: { [Op.or]: [{ storyId: { [Op.in]: storyIds }}, userId] } });
+  await db.Comment.destroy({ where: { [Op.or]: [{ storyId: storyIds }, { userId }] } });
 
   // delete all stories owned by userId, follows by userID and finally delete user
-  await db.Story.destroy({ where: { id: { [Op.in]: storyIds } } });
+  await db.Story.destroy({ where: { id: storyIds } });
   await db.Follow.destroy({ where: { userId } });
   await db.User.destroy({ where: { id: userId } });
 }
