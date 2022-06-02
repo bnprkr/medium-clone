@@ -11,9 +11,13 @@ mixin field(labelText, fieldName, fieldValue, fieldType = 'text', placeholder)
     label(for=fieldName)= labelText
     input(type=fieldType id=fieldName name=fieldName placeholder=placeholder value=fieldValue)
 
-mixin storyPreviews(stories, source)
+mixin storyPreviews(stories, source, title)
   .stories-container
     .my-stories
+      .header
+        h1 #{title}
+        if source === 'my-stories'
+          a(href='/create').create-story Create Story
       each story in stories 
         article 
           if source === 'my-stories'
