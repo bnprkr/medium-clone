@@ -118,11 +118,27 @@ router.get('/me/stories',
 
 router.get('/create-story',
   asyncHandler(async (req, res) => {
-    return res.render('create-story', {
+    return res.render('create-story');
+  })
+)
 
+router.post('/create-story',
+  asyncHandler(async (req, res) => {
+    const userId = res.locals.user.id;
+    const { title } = req.body;
+    let { storyText } = req.body;
 
-      
-    });
+    const regex = /(\r\n){1,}/g;
+    storyText = storyText.replace(regex, '\n');
+
+    const story = await Story.create({ userId, title, storyText });
+
+    if (story) {
+      res.status(201).redirect('/me/stories');
+    } else {
+      // shouldn't be possible to reach here
+      return res.status(403).end();
+    }
   })
 )
 
