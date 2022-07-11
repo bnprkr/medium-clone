@@ -1,7 +1,7 @@
 const { numStories, stories } = require("./storiesData");
 // const { numComments, comments } = require("./commentsData");
 
-const numStoryLikes = numStories * 55;
+const numStoryLikes = numStories * 12;
 // const numCommentLikes = numComments * 12;
 
 const storyLikes = [];
