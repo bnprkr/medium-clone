@@ -6,7 +6,8 @@
   "scripts": {
     "start": "per-env",
     "start:development": "nodemon -r dotenv/config ./bin/www",
-    "start:production": "node ./bin/www"
+    "start:production": "node ./bin/www",
+    "postcss:watch": "postcss src/style.css --dir public --watch"
   },
   "repository": {
     "type": "git",
@@ -37,9 +38,18 @@
     "sequelize-cli": "^6.4.1"
   },
   "devDependencies": {
+    "cssnano": "^5.1.12",
     "dotenv": "^16.0.0",
     "dotenv-cli": "^5.0.0",
     "nodemon": "^2.0.15",
+    "postcss": "^8.4.14",
+    "postcss-cli": "^10.0.0",
+    "postcss-import": "^14.1.0",
+    "postcss-normalize": "^10.0.1",
+    "postcss-preset-env": "^7.7.2",
     "uuid": "^8.3.2"
-  }
+  },
+  "browserslist": [
+    "defaults"
+  ]
 }
