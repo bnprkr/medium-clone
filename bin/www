@@ -1,23 +1,19 @@
 #!/usr/bin/env node
 
-const { port } = require('../config');
+const { port } = require("../config");
 
-const app = require('../app');
-const db = require('../db/models')
+const app = require("../app");
+const db = require("../db/models");
 
 // check connection to database before starting app
 
-db.sequelize.authenticate()
+db.sequelize
+  .authenticate()
   .then(() => {
-    console.log('Connection to database established successfully.')
+    console.log("Connection to database established successfully.");
     app.listen(port, () => console.log(`Listening on port ${port}...`));
   })
   .catch((err) => {
-    console.log('Connection to database failed.')
+    console.log("Connection to database failed.");
     console.log(err);
   });
-
-
-
-
-

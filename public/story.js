@@ -5,12 +5,13 @@
 // create html of comment and prepend to comments-list
 // make sure comments are displayed in reverse chronological order..
 
-
 const addCommentButton = document.querySelector(".comment-submit>input");
 
-addCommentButton.addEventListener('click', async (event) => {
+addCommentButton.addEventListener("click", async (event) => {
   // get comment text
-  const commentBox = document.querySelector(".comment-form .comment-text>textarea");
+  const commentBox = document.querySelector(
+    ".comment-form .comment-text>textarea"
+  );
   const textRaw = commentBox.value;
 
   if (textRaw) {
@@ -18,16 +19,15 @@ addCommentButton.addEventListener('click', async (event) => {
     const commentData = {
       author: username,
       text: textRaw,
-    }
+    };
 
     const response = await fetch(`${url}/api/stories/${storyId}/comment`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(commentData)
-    })
-    .catch(error => console.error(error));
+      body: JSON.stringify(commentData),
+    }).catch((error) => console.error(error));
 
     if (response.ok) {
       // create comment container
@@ -43,12 +43,12 @@ addCommentButton.addEventListener('click', async (event) => {
       const commentTextDiv = document.createElement("div");
       commentTextDiv.classList.add("comment-text");
 
-      textRaw.split('\n').forEach(para => {
+      textRaw.split("\n").forEach((para) => {
         const element = document.createElement("p");
         const text = document.createTextNode(`${para}`);
         element.appendChild(text);
         commentTextDiv.appendChild(element);
-      })
+      });
 
       commentDiv.appendChild(commentTextDiv);
 
@@ -58,21 +58,20 @@ addCommentButton.addEventListener('click', async (event) => {
     }
 
     // clear comment textarea
-    commentBox.value = '';
+    commentBox.value = "";
   }
 });
 
 const likeButton = document.querySelector("i.like-button");
 
 likeButton.addEventListener("click", async (event) => {
-
-  const storyId = window.location.href.split('/')[5];
+  const storyId = window.location.href.split("/")[5];
 
   const likes = document.querySelector(".story-likes > span");
 
   try {
     const res = await fetch(`${url}/api/stories/${storyId}/like`, {
-      method: 'GET',
+      method: "GET",
     });
 
     const { liked } = await res.json();
@@ -80,7 +79,7 @@ likeButton.addEventListener("click", async (event) => {
     if (liked) {
       // if liked delete like
       const deleteLike = await fetch(`${url}/api/stories/${storyId}/like`, {
-        method: 'DELETE',
+        method: "DELETE",
       });
 
       if (deleteLike) {
@@ -89,10 +88,9 @@ likeButton.addEventListener("click", async (event) => {
       } else {
         // error handle failed like delete?
       }
-
     } else {
       const addLike = await fetch(`${url}/api/stories/${storyId}/like`, {
-        method: 'POST',
+        method: "POST",
       });
 
       if (addLike) {
@@ -100,7 +98,6 @@ likeButton.addEventListener("click", async (event) => {
         likes.innerHTML = parseInt(likes.innerHTML) + 1;
       }
     }
-
   } catch (e) {
     console.log(e);
   }

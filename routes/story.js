@@ -1,15 +1,23 @@
-const express = require('express');
-const { validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
+const express = require("express");
+const { validationResult } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
-const db = require('../db/models');
-const { csrfProtection, asyncHandler } = require('./utils'); 
-const { userValidators, loginValidators } = require('./validators')
-const { loginUser, requireAuth } = require('../auth');
-const { Story, Comment, User, StoryLike, CommentLike, Follow, sequelize } = require('../db/models');
-const { Op } = require('sequelize');
-const { numUsers } = require('../db/seeders/data/usersData');
-const { url } = require('../config');
+const db = require("../db/models");
+const { csrfProtection, asyncHandler } = require("./utils");
+const { userValidators, loginValidators } = require("./validators");
+const { loginUser, requireAuth } = require("../auth");
+const {
+  Story,
+  Comment,
+  User,
+  StoryLike,
+  CommentLike,
+  Follow,
+  sequelize,
+} = require("../db/models");
+const { Op } = require("sequelize");
+const { numUsers } = require("../db/seeders/data/usersData");
+const { url } = require("../config");
 
 // array of ids for seeded users
 const users = [];
@@ -23,12 +31,14 @@ router.use(requireAuth);
 
 const charsInPreview = 120;
 
-router.get('/@:username/stories',
+router.get(
+  "/@:username/stories",
   asyncHandler(async (req, res) => {
+    console.log(req.params.username);
 
-    console.log(req.params.username)
-
-    const user = await User.findOne({ where: { username: req.params.username } })
+    const user = await User.findOne({
+      where: { username: req.params.username },
+    });
     const userId = user.id;
 
     const stories = await Story.findAll({
@@ -36,7 +46,7 @@ router.get('/@:username/stories',
       include: [User, StoryLike, Comment],
     });
 
-    const storiesData = stories.map(story => {
+    const storiesData = stories.map((story) => {
       return {
         title: story.title,
         authorId: story.userId,
@@ -44,47 +54,47 @@ router.get('/@:username/stories',
         sample: story.storyText.slice(0, charsInPreview),
         numLikes: story.StoryLikes.length,
         numComments: story.Comments.length,
-      }
+      };
     });
 
     return res.send(storiesData);
   })
 );
 
-router.get('/@:username/stories/:storyId',
+router.get(
+  "/@:username/stories/:storyId",
   asyncHandler(async (req, res) => {
     const storyId = parseInt(req.params.storyId);
     const username = res.locals.user.username;
     const currentUserId = res.locals.user.id;
 
-    const story = await Story.findOne({ 
+    const story = await Story.findOne({
       where: { id: storyId },
       include: [
-        User, 
-        StoryLike, 
-        { model: Comment, 
+        User,
+        StoryLike,
+        {
+          model: Comment,
           where: {
             // exclude comments from demo/registered users
-            userId: users.concat(currentUserId)
+            userId: users.concat(currentUserId),
           },
-          include: User 
-        }
+          include: User,
+        },
       ],
-      order: [
-        [Comment, 'createdAt', 'DESC']
-      ]
+      order: [[Comment, "createdAt", "DESC"]],
     });
 
-    const comments = story.Comments.map(comment => {
+    const comments = story.Comments.map((comment) => {
       return {
         author: comment.User.username,
         title: comment.title,
         text: comment.commentText,
-      }
+      };
     });
 
-    const liked = story.StoryLikes.some(like => {
-      return (like.storyId === storyId && like.userId === currentUserId);
+    const liked = story.StoryLikes.some((like) => {
+      return like.storyId === storyId && like.userId === currentUserId;
     });
 
     const storyData = {
@@ -97,10 +107,10 @@ router.get('/@:username/stories/:storyId',
       comments,
     };
 
-    return res.render('story', {
+    return res.render("story", {
       username,
       story: storyData,
-      url
+      url,
     });
   })
 );

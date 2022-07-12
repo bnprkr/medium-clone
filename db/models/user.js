@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -11,54 +9,56 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Story, { foreignKey: 'userId' });
-      User.hasMany(models.StoryLike, { foreignKey: 'userId' });
-      User.hasMany(models.Comment, { foreignKey: 'userId' });
-      User.hasMany(models.CommentLike, { foreignKey: 'userId' });
-      User.hasMany(models.Follow, { foreignKey: 'userId' });
-      
-      // User.belongsToMany(User, { 
-      //   as: 'following', 
-      //   through: models.Follow, 
-      //   foreignKey: 'userId' 
+      User.hasMany(models.Story, { foreignKey: "userId" });
+      User.hasMany(models.StoryLike, { foreignKey: "userId" });
+      User.hasMany(models.Comment, { foreignKey: "userId" });
+      User.hasMany(models.CommentLike, { foreignKey: "userId" });
+      User.hasMany(models.Follow, { foreignKey: "userId" });
+
+      // User.belongsToMany(User, {
+      //   as: 'following',
+      //   through: models.Follow,
+      //   foreignKey: 'userId'
       // });
-      // User.belongsToMany(User, { 
-      //   as: 'followers', 
-      //   through: models.Follow, 
-      //   foreignKey: 'followingUserId' 
+      // User.belongsToMany(User, {
+      //   as: 'followers',
+      //   through: models.Follow,
+      //   foreignKey: 'followingUserId'
       // });
-      
     }
   }
-  User.init({
-    username: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
+  User.init(
+    {
+      username: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      email: {
+        type: DataTypes.STRING,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      demo: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+        validate: {
+          notEmpty: true,
+        },
+      },
+      hashedPassword: {
+        type: DataTypes.STRING.BINARY,
+        validate: {
+          notEmpty: true,
+        },
       },
     },
-    email: {
-      type: DataTypes.STRING,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    demo: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-      validate: {
-        notEmpty: true,
-      },
-    },
-    hashedPassword: {
-      type: DataTypes.STRING.BINARY,
-      validate: {
-        notEmpty: true,
-      },
-    },
-  }, {
-    sequelize,
-    modelName: 'User',
-  });
+    {
+      sequelize,
+      modelName: "User",
+    }
+  );
   return User;
 };

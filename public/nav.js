@@ -3,7 +3,6 @@ const toggle = document.querySelector(".toggle");
 
 // toggle menu for mobile view
 function toggleMenu() {
-
   if (menu.classList.contains("active")) {
     menu.classList.remove("active");
 
@@ -18,5 +17,4 @@ function toggleMenu() {
 }
 
 // add event listener to toggle
-toggle.addEventListener('click', toggleMenu);
-
+toggle.addEventListener("click", toggleMenu);

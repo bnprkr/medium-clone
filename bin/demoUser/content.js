@@ -1,16 +1,16 @@
-const db = require('../../db/models');
-const { numUsers } = require('../../db/seeders/data/usersData');
-const { 
-  lorem, 
-  maxWordsTitle, 
-  minParasPerStory, 
-  maxParasPerStory 
-} = require('../../db/seeders/data/storiesData');
+const db = require("../../db/models");
+const { numUsers } = require("../../db/seeders/data/usersData");
 const {
-  minSentencePerComment, 
-  maxSentencePerComment, 
+  lorem,
+  maxWordsTitle,
+  minParasPerStory,
+  maxParasPerStory,
+} = require("../../db/seeders/data/storiesData");
+const {
+  minSentencePerComment,
+  maxSentencePerComment,
   maxWordsTitle: maxWordsCommentTitle,
-} = require('../../db/seeders/data/commentsData');
+} = require("../../db/seeders/data/commentsData");
 
 async function generateContent(user) {
   // get userId
@@ -33,14 +33,14 @@ async function createStories(userId) {
   const numStories = 11 + Math.floor(Math.random() * (20 - 11));
 
   for (let i = 0; i < numStories; i++) {
-    stories.push(
-      {
-        userId,
-        title: lorem.generateWords(Math.floor(Math.random() * maxWordsTitle) + 1),
-        storyText: lorem
-          .generateParagraphs(Math.floor(Math.random() * (maxParasPerStory - minParasPerStory + 1)) + minParasPerStory),
-      }
-    );
+    stories.push({
+      userId,
+      title: lorem.generateWords(Math.floor(Math.random() * maxWordsTitle) + 1),
+      storyText: lorem.generateParagraphs(
+        Math.floor(Math.random() * (maxParasPerStory - minParasPerStory + 1)) +
+          minParasPerStory
+      ),
+    });
   }
 
   // add stories to db
@@ -49,12 +49,12 @@ async function createStories(userId) {
   // get and return story ids
   const storyIds = await db.Story.findAll({
     raw: true,
-    attributes: ['id'],
+    attributes: ["id"],
     where: {
-      userId
-    }
+      userId,
+    },
   }).then((ids) => {
-    return ids.map(obj => obj.id);
+    return ids.map((obj) => obj.id);
   });
 
   return storyIds;
@@ -68,13 +68,11 @@ async function createStoryLikes(storyIds) {
     // 4 to 75 story likes
     const numStoryLikes = 4 + Math.floor(Math.random() * (76 - 4));
     for (let i = 0; i < numStoryLikes; i++) {
-      storyLikes.push(
-        {
-          // all likes come from same user as made-up data 
-          userId: 2,
-          storyId: id
-        }
-      );
+      storyLikes.push({
+        // all likes come from same user as made-up data
+        userId: 2,
+        storyId: id,
+      });
     }
   }
 
@@ -91,16 +89,19 @@ async function createComments(storyIds) {
     const numStoryComments = 2 + Math.floor(Math.random() * (9 - 2));
 
     for (let i = 0; i < numStoryComments; i++) {
-      comments.push(
-        {
-          storyId: id,
-          // comments all belong to seeded users 1-10
-          userId: Math.floor(Math.random() * numUsers) + 1,
-          title: lorem.generateWords(Math.floor(Math.random() * maxWordsCommentTitle) + 1),
-          commentText: lorem
-            .generateSentences(Math.floor(Math.random() * (maxSentencePerComment - minSentencePerComment + 1)) + minSentencePerComment),
-        }
-      );
+      comments.push({
+        storyId: id,
+        // comments all belong to seeded users 1-10
+        userId: Math.floor(Math.random() * numUsers) + 1,
+        title: lorem.generateWords(
+          Math.floor(Math.random() * maxWordsCommentTitle) + 1
+        ),
+        commentText: lorem.generateSentences(
+          Math.floor(
+            Math.random() * (maxSentencePerComment - minSentencePerComment + 1)
+          ) + minSentencePerComment
+        ),
+      });
     }
   }
 
@@ -127,12 +128,10 @@ async function createFollows(userId) {
     // remove selected user from users array
     users.splice(index, 1);
 
-    follows.push(
-      {
-        userId,
-        followingUserId: followId,
-      }
-    );
+    follows.push({
+      userId,
+      followingUserId: followId,
+    });
   }
 
   // add follows to db
