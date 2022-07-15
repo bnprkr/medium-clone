@@ -245,10 +245,6 @@ article {
 
 /* media query for mobile */
 @media all and (max-width: 480px) {
-  article {
-    margin-bottom: var(--space-size-13);
-  }
-
   .my-stories > .header {
     flex-direction: column;
     gap: var(--space-size-13);
