@@ -784,6 +784,7 @@ p + p {
 
 .login-form-buttons > .demo-login {
   background-color: var(--grey-5);
+  font-weight: 500;
 }
 
 .login-form-buttons > .login {
