@@ -64,6 +64,7 @@ h6 {
   --space-size-3: 512px;
   --space-size-3-half: 448px;
   --space-size-4: 384px;
+  --space-size-4-half: 320px;
   --space-size-5: 256px;
   --space-size-6: 192px;
   --space-size-7: 128px;
@@ -274,6 +275,7 @@ p + p {
   display: flex;
   justify-content: center;
   margin: 0 var(--space-size-15);
+  margin: 0 var(--space-size-11);
 }
 
 .story-box-full {
@@ -318,10 +320,16 @@ p + p {
   color: red;
 }
 
+/* media query tablet  */
+@media only screen and (min-width: 480px) and (max-width: 700px) {
+  .story-box-full > .story-text {
+    width: 100%;
+  }
+}
+
 /* media query for mobile */
 @media all and (max-width: 480px) {
   .story-box-full > .story-text {
-    width: 100%;
     font-size: var(--font-size-9);
     padding-bottom: var(--space-size-13);
   }
@@ -411,18 +419,31 @@ p + p {
   font-weight: 500;
 }
 
-/* media query for mobile */
-@media all and (max-width: 480px) {
+/* media query tablet  */
+@media only screen and (min-width: 480px) and (max-width: 700px) {
+  .comment-form,
   .comment-box {
-    margin: var(--space-size-14) 0;
-  }
-
-  .comment-box {
-    width: 100%;
+    width: var(--space-size-4-half);
   }
 
   .comment-text > textarea {
-    width: 100%;
+    width: calc(var(--space-size-4-half) - 20px);
+  }
+}
+
+/* media query for mobile */
+@media all and (max-width: 480px) {
+  .comment-form,
+  .comment-box {
+    width: var(--space-size-5);
+  }
+
+  .comment-text > textarea {
+    width: calc(var(--space-size-5) - 20px);
+  }
+
+  .comment-box {
+    margin: var(--space-size-14) 0;
   }
 
   .comment-text > textarea::placeholder {
