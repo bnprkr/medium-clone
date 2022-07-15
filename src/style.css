@@ -219,7 +219,6 @@ article {
   font-family: var(--default-serif);
   font-size: var(--font-size-9);
   width: 35em;
-  /* min-width: 100px; */
 }
 
 .story-box > .story-title {
@@ -328,7 +327,7 @@ p + p {
 }
 
 /* media query for mobile */
-@media all and (max-width: 480px) {
+/* @media all and (max-width: 480px) {
   .story-box-full > .story-text {
     font-size: var(--font-size-9);
     padding-bottom: var(--space-size-13);
@@ -344,7 +343,7 @@ p + p {
     font-size: var(--font-size-11);
     padding: var(--space-size-16) var(--space-size-16);
   }
-}
+} */
 
 /* full story page comments area - comment input form */
 
