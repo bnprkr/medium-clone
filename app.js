@@ -13,8 +13,18 @@ const apiRoutes = require("./routes/api");
 const { restoreUser } = require("./auth");
 
 const app = express();
-
 app.set("view engine", "pug");
+
+// middleware using the header set by heroku
+// (request.secure will always be false on heroku hosted apps)
+// and forwards to https if already secure
+if (process.env.NODE_ENV === "production") {
+  app.use((req, res, next) => {
+    if (req.header("x-forwarded-proto") !== "https")
+      res.redirect(`https://${req.header("host")}${req.url}`);
+    else next();
+  });
+}
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser(secret));
 app.use(
