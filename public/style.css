@@ -158,7 +158,7 @@ a.story-box {
 .stories-container {
   display: flex;
   justify-content: center;
-  margin: 0 var(--space-size-15);
+  margin: 0 var(--space-size-11);
 }
 
 .my-stories {
@@ -236,12 +236,15 @@ article {
   font-weight: 600;
 }
 
-/* media query for mobile */
-@media all and (max-width: 480px) {
+/* media query tablet  */
+@media only screen and (max-width: 700px) {
   .story-box > .story-text {
     width: 100%;
   }
+}
 
+/* media query for mobile */
+@media all and (max-width: 480px) {
   article {
     margin-bottom: var(--space-size-13);
   }
@@ -274,7 +277,6 @@ p + p {
 .story-container {
   display: flex;
   justify-content: center;
-  margin: 0 var(--space-size-15);
   margin: 0 var(--space-size-11);
 }
 
