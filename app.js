@@ -15,9 +15,9 @@ const { restoreUser } = require("./auth");
 const app = express();
 app.set("view engine", "pug");
 
-// middleware using the header set by heroku
-// (request.secure will always be false on heroku hosted apps)
-// and forwards to https if already secure
+// middleware to redirect to https if not secure
+// uses header set by heroku as request.secure will always be false
+// on heroku hosted apps due to how routing implemented
 if (process.env.NODE_ENV === "production") {
   app.use((req, res, next) => {
     if (req.header("x-forwarded-proto") !== "https")
