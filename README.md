@@ -8,7 +8,7 @@ New users can register, or log in as a demo user, creating a new user (who is fo
 
 ## Live demo (note: server takes ~20 seconds to start)
 
-https://lorem-ipsum-medium.herokuapp.com
+https://medium.benparker.net
 
 ## Technologies
 
