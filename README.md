@@ -1,14 +1,14 @@
 # Medium clone
 
+## Live demo
+
+https://medium.benparker.net
+
 ## Introduction
 
 A simplified clone of Medium, with randomly generated users, stories, comments, likes and follows, with stories and comments generated using “lorem ipsum” placeholder text. The currently logged in user can view their story feed, with a random selection of stories belonging to users they are following. Stories can be open and viewed, liked or commented on. Users can view, edit or delete their own stories, as well as create new stories.
 
 New users can register, or log in as a demo user, creating a new user (who is following a random selection of other users) with their own stories generated (as well as likes and comments from other users). Demo users are isolated from other demo users so they only see the content generated for the seeded users, and the demo account is deleted when the user logs out.
-
-## Live demo (note: server takes ~20 seconds to start)
-
-https://medium.benparker.net
 
 ## Technologies
 
